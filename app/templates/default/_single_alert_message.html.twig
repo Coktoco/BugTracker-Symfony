@@ -1,0 +1,13 @@
+{#
+Single flash message template.
+
+parameters:
+    - type: Message type according to Bootstrap alert types,
+    - message: Message content,
+#}
+<div class="alert alert-{{ type }}" role="alert">
+    {% include 'default/_single_alert_message.html.twig' with {
+        type: 'warning',
+        message: 'message.empty_list'|trans
+    } %}
+</div>
