@@ -6,6 +6,7 @@
 namespace App\Service;
 
 use App\Entity\Task;
+use App\Entity\User;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 
 /**
@@ -18,9 +19,9 @@ interface TaskServiceInterface
      *
      * @param int $page Page number
      *
-     * @return PaginationInterface<string, mixed> Paginated list
+     * @return PaginationInterface<SlidingPagination> Paginated list
      */
-    public function getPaginatedList(int $page): PaginationInterface;
+    public function getPaginatedList(int $page, User $author, array $filters = []): PaginationInterface;
 
     /**
      * Save entity.

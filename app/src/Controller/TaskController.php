@@ -50,14 +50,39 @@ class TaskController extends AbstractController
      *
      * @return Response HTTP response
      */
-    #[Route(name: 'task_index', methods: 'GET')]
+    #[Route(
+        name: 'task_index',
+        methods: 'GET'
+    )]
     public function index(Request $request): Response
     {
+        $filters = $this->getFilters($request);
+        /** @var User $user */
+        $user = $this->getUser();
         $pagination = $this->taskService->getPaginatedList(
-            $request->query->getInt('page', 1)
+            $request->query->getInt('page', 1),
+            $user,
+            $filters
         );
 
         return $this->render('task/index.html.twig', ['pagination' => $pagination]);
+    }
+    /**
+     * Get filters from request.
+     *
+     * @param Request $request HTTP request
+     *
+     * @return array<string, int> Array of filters
+     *
+     * @psalm-return array{category_id: int, status_id: int}
+     */
+    private function getFilters(Request $request): array
+    {
+        $filters = [];
+        $filters['category_id'] = $request->query->getInt('filters_category_id');
+        $filters['status_id'] = $request->query->getInt('filters_status_id');
+
+        return $filters;
     }
 
     /**

@@ -11,8 +11,30 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
     {% endblock %}
 </head>
+<header class="container-fluid navbar navbar-expand-lg justify-content-between" style="background-color: #e3f2fd; ">
+    {% block header %}
+        <div class="col">
+            <h2 class="fw-light"> Bug_Trackerr</h2>
+        </div>
+        <div class="row">
+            {% if app.user %}
+                <div class="col">
+                    <h5 class="fw-medium text-nowrap pt-2">
+                        You are logged in as:
+                    </h5>
+                </div>
+                <div class="col">
+                    <h5 class="fw-light pt-2"> {{ app.user.userIdentifier }} </h5>
+                </div>
+                <div class="col">
+                <a class="btn btn-primary" href="{{ path('app_logout') }}">Logout</a>
+                </div>
+            {% endif %}
+        </div>
+    {% endblock header %}
+</header>
 <body>
-<main role="main" class="container-fluid mt-3">
+<main role="main" class="container-fluid mt-3" >
     {% for type, messages in app.session.flashBag.all %}
         {% for message in messages %}
             <div class="alert alert-{{ type }}" role="alert">
