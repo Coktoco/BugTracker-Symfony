@@ -50,8 +50,15 @@ class TaskType extends AbstractType
                 'label' => 'label.category',
                 'placeholder' => 'label.none',
                 'required' => true,
-            ]
-        );
+            ]);
+        $builder->add(
+            'status',
+            TextType::class,
+            [
+                'label' => 'label.status',
+                'required' => true,
+                'attr' => ['max_length' => 1],
+            ]);
     }
 
     /**

@@ -67,6 +67,11 @@
                 </a>
             </div>
             <div class="col-2">
+                <a class="btn btn-light btn-link" href="{{ url('task_create')}}" title="{{ 'task.action.create'|trans }}">
+                    {{ 'task.action.create'|trans }}
+                </a>
+            </div>
+            <div class="col-2">
             {% if app.request.uri %}
                 <a class="btn btn-outline-primary" href="{{ url('task_index') }}" title="{{ 'action.task.index'|trans }}">
                     {{ 'action.task.index'|trans }}
