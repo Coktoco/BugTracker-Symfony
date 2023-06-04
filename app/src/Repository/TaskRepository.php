@@ -61,7 +61,9 @@ class TaskRepository extends ServiceEntityRepository
             ->select(
                 'partial task.{id, createdAt, updatedAt, title, status}',
                 'partial category.{id, title}',
+                'partial status.{id, status}',
             )
+            ->join('task.status', 'status')
             ->join('task.category', 'category')
             ->orderBy('task.updatedAt', 'DESC');
 
@@ -83,9 +85,9 @@ class TaskRepository extends ServiceEntityRepository
                 ->setParameter('category', $filters['category']);
         }
 
-        if (isset($filters['tag']) && $filters['tag'] instanceof Tag) {
-            $queryBuilder->andWhere('tags IN (:tag)')
-                ->setParameter('tag', $filters['tag']);
+        if (isset($filters['status']) && $filters['status'] instanceof Status) {
+            $queryBuilder->andWhere('status = :status')
+                ->setParameter('status', $filters['status']);
         }
 
         return $queryBuilder;
@@ -126,6 +128,16 @@ class TaskRepository extends ServiceEntityRepository
 
         $queryBuilder->andWhere('task.author = :author')
             ->setParameter('author', $user);
+
+        return $queryBuilder;
+    }
+
+    public function queryByStatus(StatusInterface $status, array $filters = []): QueryBuilder
+    {
+        $queryBuilder = $this->queryAll($filters);
+
+        $queryBuilder->andWhere('task.status = :status')
+            ->setParameter('status', $status);
 
         return $queryBuilder;
     }

@@ -15,7 +15,7 @@
                 <th>{{ knp_pagination_sortable(pagination, 'label.created_at'|trans, 'task.createdAt') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label.updated_at'|trans, 'task.updatedAt') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label.title'|trans, 'task.title') }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'label.status'|trans, 'task.status') }}</th>
+                <th>{{ 'label.status'|trans }}</th>
                 <th>{{ 'label.category'|trans }}</th>
                 <th>{{ 'label.actions'|trans }}</th>
 
@@ -29,7 +29,7 @@
                     <td>{{ task.createdAt|format_date('long') }}</td>
                     <td>{{ task.updatedAt|format_date('long') }}</td>
                     <td>{{ task.title }}</td>
-                    <td>{{ task.status }}</td>
+                    <td>{{ task.status.status }}</td>
                     <td>
                         <a href="{{ url('task_index', {'filters.category_id' : task.category.id}) }}" title="{{ task.category.title }}">
                             {{ task.category.title }}
@@ -57,7 +57,7 @@
             </tbody>
         </table>
 
-        <div class="navigation text-center row">
+        <div class="navigation text-center row justify-content-start">
             <div class="col-4">
             {{ knp_pagination_render(pagination) }}
             </div>
@@ -67,7 +67,7 @@
                 </a>
             </div>
             <div class="col-2">
-                <a class="btn btn-light btn-link" href="{{ url('task_create')}}" title="{{ 'task.action.create'|trans }}">
+                <a class="btn  btn-success" href="{{ url('task_create')}}" title="{{ 'task.action.create'|trans }}">
                     {{ 'task.action.create'|trans }}
                 </a>
             </div>

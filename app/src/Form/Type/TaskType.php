@@ -7,6 +7,7 @@ namespace App\Form\Type;
 
 use App\Entity\Category;
 use App\Entity\Task;
+use App\Entity\Status;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -53,11 +54,15 @@ class TaskType extends AbstractType
             ]);
         $builder->add(
             'status',
-            TextType::class,
+            EntityType::class,
             [
+                'class' => Status::class,
+                'choice_label' => function ($status): string {
+                    return $status->getStatus();
+                },
                 'label' => 'label.status',
+                'placeholder' => 'label.none',
                 'required' => true,
-                'attr' => ['max_length' => 1],
             ]);
     }
 

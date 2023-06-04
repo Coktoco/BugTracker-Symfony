@@ -6,9 +6,9 @@
 namespace App\DataFixtures;
 
 use App\Entity\Category;
-use App\Entity\Enum\TaskStatus;
 use App\Entity\Task;
 use App\Entity\User;
+use App\Entity\Status;
 use DateTimeImmutable;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
@@ -47,7 +47,9 @@ class TaskFixtures extends AbstractBaseFixtures implements DependentFixtureInter
             $category = $this->getRandomReference('categories');
             $task->setCategory($category);
 
-            $task->setStatus(TaskStatus::from($this->faker->numberBetween(1, 2))->label());
+            /** @var Status $status */
+            $status = $this->getRandomReference('statuses');
+            $task->setStatus($status);
 
             /** @var User $author */
             $author = $this->getRandomReference('users');

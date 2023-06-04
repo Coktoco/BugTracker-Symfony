@@ -82,8 +82,9 @@ class Task
     #[Assert\Type(User::class)]
     private ?User $author;
 
-    #[ORM\Column]
-    private ?int $status = null;
+    #[ORM\ManyToOne(targetEntity: Status::class)]
+    #[ORM\JoinColumn(nullable: true)]
+    private ?Status $status = null;
 
     /**
      * Getter for Id.
@@ -179,12 +180,12 @@ class Task
         return $this;
     }
 
-    public function getStatus(): ?int
+    public function getStatus(): ?Status
     {
         return $this->status;
     }
 
-    public function setStatus(int $status): self
+    public function setStatus(?Status $status): self
     {
         $this->status = $status;
 

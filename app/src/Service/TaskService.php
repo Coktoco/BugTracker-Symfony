@@ -7,6 +7,7 @@ namespace App\Service;
 
 use App\Entity\Task;
 use App\Entity\User;
+use App\Entity\Status;
 use App\Repository\TaskRepository;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
