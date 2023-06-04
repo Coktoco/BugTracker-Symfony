@@ -1,6 +1,6 @@
 {% include 'default/_form.html.twig' with {
-    page_title: 'title.task_delete'|trans({'%id%': task.id|default('')}),
+    page_title: 'Delete Bug Report'|trans({'%id%': task.id|default('')}),
     form: form,
-    submit_label: 'action.delete'|trans,
+    submit_label: 'Delete'|trans,
     back_to_list_path: 'task_index',
 } %}

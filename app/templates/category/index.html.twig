@@ -1,20 +1,20 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    {{ 'title.category_list'|trans }}
+    {{ 'Bug-Trackerr Category List'|trans }}
 {% endblock %}
 
 {% block body %}
-    <h1>{{ 'title.category_list'|trans }}</h1>
+    <h1>{{ 'Category List'|trans }}</h1>
     {% if pagination is defined and pagination.items|length %}
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>{{ knp_pagination_sortable(pagination, 'label.id'|trans, 'category.id') }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'label.title'|trans, 'category.title') }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'label.created_at'|trans, 'category.createdAt') }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'label.updated_at'|trans, 'category.updatedAt') }}</th>
-                <th>{{ 'label.actions'|trans }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'Category_ID'|trans, 'Category_ID') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'Title'|trans, 'Title') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'Added'|trans, 'Added') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'Updated'|trans, 'Updated') }}</th>
+                <th>{{ 'Buttons'|trans }}</th>
             </tr>
             </thead>
             <tbody>
@@ -25,15 +25,23 @@
                     <td>{{ category.createdAt|format_date('long') }}</td>
                     <td>{{ category.updatedAt|format_date('long') }}</td>
                     <td class="row">
-                            <a class="col" href="{{ url('category_show', {id: category.id}) }}" title="{{ 'action.show'|trans }}">
-                                {{ 'action.show'|trans }}
+                        <div class="col">
+                            <a class="btn btn-success" href="{{ url('category_show', {id: category.id}) }}" title="{{ 'Details'|trans }}">
+                                {{ 'Details'|trans }}
                             </a>
-                            <a class="col" href="{{ url('category_delete', {id: category.id}) }}" title="{{ ' action.delete'|trans }}">
-                                {{ 'action.delete'|trans }}
+                        </div>
+                        <div class="col">
+                            <a class="btn btn-primary" href="{{ url('category_edit', {id: category.id}) }}" title="{{ 'Edit'|trans }}">
+                                {{ 'Edit'|trans }}
                             </a>
-                            <a class="col" href="{{ url('category_edit', {id: category.id}) }}" title="{{ ' action.edit'|trans }}">
-                                {{ 'action.edit'|trans }}
+                        </div>
+
+                        <div class="col">
+                            <a class="btn btn-danger" href="{{ url('category_delete', {id: category.id}) }}" title="{{ 'Delete'|trans }}">
+                                {{ 'Delete'|trans }}
                             </a>
+                        </div>
+
                     </td>
                 </tr>
             {% endfor %}
@@ -44,14 +52,14 @@
             <div class="col-4">
             {{ knp_pagination_render(pagination) }}
             </div>
-            <div class="col-1">
-                <a class="btn btn-light" href="{{ url('category_create')}}" title="{{ 'action.create'|trans }}">
-                    {{ 'action.create'|trans }}
+            <div class="col-2">
+                <a class="btn btn-primary" href="{{ url('category_create')}}" title="{{ 'New Category'|trans }}">
+                    {{ 'New Category'|trans }}
                 </a>
             </div>
             <div class="col-2">
-                <a class="btn btn-light ml-5" href="{{ url('task_index')}}" title="{{ 'task.action.index'|trans }}">
-                    {{ 'task.action.index'|trans }}
+                <a class="btn btn-primary ml-5" href="{{ url('task_index')}}" title="{{ 'Bugs List'|trans }}">
+                    {{ 'Bugs List'|trans }}
                 </a>
             </div>
         </div>
