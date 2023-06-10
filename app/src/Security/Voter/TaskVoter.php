@@ -136,4 +136,5 @@ class TaskVoter extends Voter
     {
         return $task->getAuthor() === $user;
     }
+
 }

@@ -93,7 +93,7 @@ class TaskController extends AbstractController
      * @return Response HTTP response
      */
     #[Route('/{id}', name: 'task_show', requirements: ['id' => '[1-9]\d*'], methods: 'GET' )]
-    #[IsGranted('VIEW', subject: 'task')]
+    //#[IsGranted('VIEW', subject: 'task')]
     public function show(Task $task): Response
     {
         return $this->render('task/show.html.twig', ['task' => $task]);

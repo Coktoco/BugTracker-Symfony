@@ -10,11 +10,11 @@
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>{{ knp_pagination_sortable(pagination, 'Bug_ID'|trans, 'Bug_ID') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'Bug_ID'|trans, 'task.id') }}</th>
                 <th>{{ 'Reported by'|trans }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'Added'|trans, 'Added') }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'Updated'|trans, 'Updated') }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'Title'|trans, 'Title') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'Added'|trans, 'task.createdAt') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'Updated'|trans, 'task.updatedAt') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'Title'|trans, 'task.title') }}</th>
                 <th>{{ 'Current Status'|trans }}</th>
                 <th>{{ 'Category'|trans }}</th>
                 <th>{{ 'Buttons'|trans }}</th>
@@ -36,11 +36,9 @@
                         </a>
                     </td>
                     <td class=row">
-                        {% if is_granted('VIEW', task) %}
                             <a class="col btn btn-outline-primary" href="{{ url('task_show', {id: task.id}) }}" title="{{ 'Details'|trans }}">
                                 {{ 'Details'|trans }}
                             </a>
-                        {% endif %}
                         {% if is_granted('EDIT', task) %}
                             <a class="col btn btn-outline-success" href="{{ url('task_edit', {id: task.id}) }}" title="{{ 'Edit'|trans }}">
                                 {{ 'Edit'|trans }}
@@ -61,11 +59,13 @@
             <div class="col-4">
             {{ knp_pagination_render(pagination) }}
             </div>
-            <div class="col-2">
-                <a class="btn btn-primary" href="{{ url('category_index')}}" title="{{ 'Category List'|trans }}">
-                    {{ 'Category List'|trans }}
-                </a>
-            </div>
+            {% if 'ROLE_ADMIN' in app.user.roles %}
+                <div class="col-2">
+                    <a class="btn btn-primary" href="{{ url('category_index')}}" title="{{ 'Category List'|trans }}">
+                        {{ 'Category List'|trans }}
+                    </a>
+                </div>
+            {% endif %}
             <div class="col-2">
                 <a class="btn  btn-success" href="{{ url('task_create')}}" title="{{ 'Report New Bug'|trans }}">
                     {{ 'Report New Bug'|trans }}
