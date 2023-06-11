@@ -2,25 +2,101 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
   <file source-language="en" datatype="plaintext" original="file.ext">
     <body>
+      <trans-unit id="label.title_main">
+        <source>label.title_main</source>
+        <target>Bug-Trackerr Bug List</target>
+      </trans-unit>
+      <trans-unit id="label.title_main_category">
+        <source>label.title_main_category</source>
+        <target>Bug-Trackerr Category List</target>
+      </trans-unit>
+      <trans-unit id="label.title_main_login">
+        <source>label.title_main_login</source>
+        <target>Log in!</target>
+      </trans-unit>
       <trans-unit id="label.actions">
         <source>label.actions</source>
         <target>Actions</target>
       </trans-unit>
       <trans-unit id="label.id">
         <source>label.id</source>
-        <target>Id</target>
+        <target>Bug ID</target>
+      </trans-unit>
+      <trans-unit id="label.id_category">
+        <source>label.id_category</source>
+        <target>Category ID</target>
       </trans-unit>
       <trans-unit id="label.title">
         <source>label.title</source>
         <target>Title</target>
       </trans-unit>
+      <trans-unit id="label.reportedBy">
+        <source>label.reportedBy</source>
+        <target>Reported by</target>
+      </trans-unit>
+      <trans-unit id="label.createdAt">
+        <source>label.createdAt</source>
+        <target>Added</target>
+      </trans-unit>
+        <trans-unit id="label.updatedAt">
+          <source>label.updatedAt</source>
+          <target>Updated at</target>
+        </trans-unit>
+      <trans-unit id="label.currentStatus">
+        <source>label.currentStatus</source>
+        <target>Current Status</target>
+      </trans-unit>
       <trans-unit id="label.content">
         <source>label.content</source>
         <target>Content</target>
       </trans-unit>
-      <trans-unit id="label.tags">
-        <source>label.tags</source>
-        <target>Tags</target>
+        <trans-unit id="label.category">
+          <source>label.category</source>
+          <target>Category</target>
+        </trans-unit>
+        <trans-unit id="label.email">
+          <source>label.email</source>
+          <target>Email</target>
+        </trans-unit>
+      <trans-unit id="label.status">
+        <source>label.status</source>
+        <target>Status</target>
+      </trans-unit>
+      <trans-unit id="label.old_password">
+        <source>label.old_password</source>
+        <target>Old Password</target>
+      </trans-unit>
+      <trans-unit id="label.new_password">
+        <source>label.new_password</source>
+        <target>New Password</target>
+      </trans-unit>
+      <trans-unit id="label.category_not_found">
+        <source>label.category_not_found</source>
+        <target>Category not found!</target>
+      </trans-unit>
+      <trans-unit id="label.none">
+        <source>label.none</source>
+        <target>Empty</target>
+      </trans-unit>
+      <trans-unit id="label.welcome">
+        <source>label.welcome</source>
+        <target>Welcome!</target>
+      </trans-unit>
+      <trans-unit id="label.logged_info">
+        <source>label.logged_info</source>
+        <target>You are logged in as:</target>
+      </trans-unit>
+     <trans-unit id="label.create_category">
+        <source>label.create_category</source>
+        <target>Create Category</target>
+      </trans-unit>
+     <trans-unit id="label.email_login">
+        <source>label.email_login</source>
+        <target>Email</target>
+      </trans-unit>
+     <trans-unit id="label.password">
+        <source>label.password</source>
+        <target>Password</target>
       </trans-unit>
       <trans-unit id="message.empty_list">
         <source>message.empty_list</source>
@@ -30,14 +106,167 @@
         <source>message.record_not_found</source>
         <target>Record not found.</target>
       </trans-unit>
-      <trans-unit id="title.record_list">
-        <source>title.record_list</source>
-        <target>Records list</target>
+      <trans-unit id="message.created_successfully">
+        <source>message.created_successfully</source>
+        <target>Added new Bug Report successfully.</target>
+      </trans-unit>
+      <trans-unit id="message.category_created_successfully">
+        <source>message.category_created_successfully</source>
+        <target>Added new Category successfully.</target>
+      </trans-unit>
+      <trans-unit id="message.edited_successfully">
+        <source>message.edited_successfully</source>
+        <target>Edited successfully.</target>
+      </trans-unit>
+      <trans-unit id="message.category_edited_successfully">
+        <source>message.category_edited_successfully</source>
+        <target>Edited successfully.</target>
+      </trans-unit>
+      <trans-unit id="message.deleted_successfully">
+        <source>message.deleted_successfully</source>
+        <target>Deleted successfully.</target>
+      </trans-unit>
+      <trans-unit id="message.category_deleted_successfully">
+        <source>message.category_deleted_successfully</source>
+        <target>Deleted successfully.</target>
+      </trans-unit>
+      <trans-unit id="message.form_error">
+        <source>message.form_error</source>
+        <target>Form error.</target>
+      </trans-unit>
+      <trans-unit id="message.category_contains_tasks">
+        <source>message.category_contains_tasks</source>
+        <target>This Category is currently in use and cannot be deleted!</target>
+      </trans-unit>
+      <trans-unit id="message.email_changed">
+        <source>message.email_changed</source>
+        <target>Email changed successfully!</target>
+      </trans-unit>
+      <trans-unit id="message.password_changed">
+        <source>message.password_changed</source>
+        <target>Password changed successfully!</target>
+      </trans-unit>
+     <trans-unit id="message.password_incorrect">
+        <source>message.password_incorrect</source>
+        <target>Incorrect Password! Try again.</target>
+      </trans-unit>
+      <trans-unit id="title.bug_list">
+        <source>title.bug_list</source>
+        <target>Bug list</target>
+      </trans-unit>
+      <trans-unit id="title.category_list">
+        <source>title.category_list</source>
+        <target>Category list</target>
+      </trans-unit>
+      <trans-unit id="title.bug_details">
+        <source>title.bug_details</source>
+        <target>Bug Details</target>
+      </trans-unit>
+      <trans-unit id="title.category_details">
+        <source>title.category_details</source>
+        <target>Category Details</target>
       </trans-unit>
       <trans-unit id="title.record_view">
         <source>title.record_view</source>
         <target>Record view #%id%</target>
       </trans-unit>
+      <trans-unit id="title.record_list">
+        <source>title.record_list</source>
+        <target>Bug List</target>
+      </trans-unit>
+      <trans-unit id="title.change_info">
+        <source>title.change_info</source>
+        <target>Change Information</target>
+      </trans-unit>
+      <trans-unit id="title.change_password">
+        <source>title.change_password</source>
+        <target>Change Password</target>
+      </trans-unit>
+      <trans-unit id="title.please_sign_in">
+        <source>title.please_sign_in</source>
+        <target>Please sign in:</target>
+      </trans-unit>
+      <trans-unit id="action.title.category_list">
+        <source>action.title.category_list</source>
+        <target>Category List</target>
+      </trans-unit>
+        <trans-unit id="action.report_new_bug">
+          <source>action.report_new_bug</source>
+          <target>Report New Bug</target>
+        </trans-unit>
+        <trans-unit id="action.reset_filters">
+          <source>action.reset_filters</source>
+          <target>Reset Filters</target>
+        </trans-unit>
+      <trans-unit id="action.title.bug_list">
+        <source>action.title.bug_list</source>
+        <target>Bug List</target>
+      </trans-unit>
+        <trans-unit id="action.create_category">
+          <source>action.create_category</source>
+          <target>Add New Category</target>
+        </trans-unit>
+        <trans-unit id="action.details">
+          <source>action.details</source>
+          <target>Details</target>
+        </trans-unit>
+        <trans-unit id="action.edit">
+          <source>action.edit</source>
+          <target>Edit</target>
+        </trans-unit>
+        <trans-unit id="action.save">
+          <source>action.save</source>
+          <target>Save Changes</target>
+        </trans-unit>
+        <trans-unit id="action.delete">
+          <source>action.delete</source>
+          <target>Delete</target>
+        </trans-unit>
+        <trans-unit id="action.change_info">
+          <source>action.change_info</source>
+          <target>Confirm Changes</target>
+        </trans-unit>
+        <trans-unit id="action.change_password">
+          <source>action.change_password</source>
+          <target>Confirm Changes</target>
+        </trans-unit>
+        <trans-unit id="action.main_site">
+          <source>action.main_site</source>
+          <target>Main Site</target>
+        </trans-unit>
+        <trans-unit id="action.sign_in">
+          <source>action.sign_in</source>
+          <target>Sign in</target>
+        </trans-unit>
+        <trans-unit id="action.sign_out">
+          <source>action.sign_out</source>
+          <target>Log out</target>
+        </trans-unit>
+       <trans-unit id="label.edit_bug">
+          <source>label.edit_bug</source>
+          <target>Edit Bug Report</target>
+        </trans-unit>
+       <trans-unit id="label.create_bug">
+          <source>label.create_bug</source>
+          <target>Create New Bug Report</target>
+        </trans-unit>
+       <trans-unit id="label.delete_bug">
+          <source>label.delete_bug</source>
+          <target>Delete Bug Report</target>
+        </trans-unit>
+       <trans-unit id="label.delete_category">
+          <source>label.delete_category</source>
+          <target>Delete Category</target>
+        </trans-unit>
+       <trans-unit id="label.edit_category">
+          <source>label.edit_category</source>
+          <target>Edit Category</target>
+        </trans-unit>
+       <trans-unit id="action.return">
+          <source>action.return</source>
+          <target>Return To Safety</target>
+        </trans-unit>
+
     </body>
   </file>
 </xliff>

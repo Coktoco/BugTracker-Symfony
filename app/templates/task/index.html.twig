@@ -1,23 +1,23 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    {{ 'Bug-Trackerr Bug List'|trans }}
+    {{ 'label.title_main'|trans }}
 {% endblock %}
 
 {% block body %}
-    <h1 class="fw-semibold fs-2">{{ 'Bug list'|trans }}</h1>
+    <h1 class="fw-semibold fs-2">{{ 'title.bug_list'|trans }}</h1>
     {% if pagination is defined and pagination.items|length %}
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>{{ knp_pagination_sortable(pagination, 'Bug_ID'|trans, 'task.id') }}</th>
-                <th>{{ 'Reported by'|trans }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'Added'|trans, 'task.createdAt') }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'Updated'|trans, 'task.updatedAt') }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'Title'|trans, 'task.title') }}</th>
-                <th>{{ 'Current Status'|trans }}</th>
-                <th>{{ 'Category'|trans }}</th>
-                <th>{{ 'Buttons'|trans }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label.id'|trans, 'task.id') }}</th>
+                <th>{{ 'label.reportedBy'|trans }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label.createdAt'|trans, 'task.createdAt') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label.updatedAt'|trans, 'task.updatedAt') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label.title'|trans, 'task.title') }}</th>
+                <th>{{ 'label.currentStatus'|trans }}</th>
+                <th>{{ 'label.category'|trans }}</th>
+                <th>{{ 'label.actions'|trans }}</th>
 
             </tr>
             </thead>
@@ -36,17 +36,17 @@
                         </a>
                     </td>
                     <td class=row">
-                            <a class="col btn btn-outline-primary" href="{{ url('task_show', {id: task.id}) }}" title="{{ 'Details'|trans }}">
-                                {{ 'Details'|trans }}
+                            <a class="col btn btn-outline-primary" href="{{ url('task_show', {id: task.id}) }}" title="{{ 'action.details'|trans }}">
+                                {{ 'action.details'|trans }}
                             </a>
                         {% if is_granted('EDIT', task) %}
-                            <a class="col btn btn-outline-success" href="{{ url('task_edit', {id: task.id}) }}" title="{{ 'Edit'|trans }}">
-                                {{ 'Edit'|trans }}
+                            <a class="col btn btn-outline-success" href="{{ url('task_edit', {id: task.id}) }}" title="{{ 'action.edit'|trans }}">
+                                {{ 'action.edit'|trans }}
                             </a>
                         {% endif %}
                         {% if is_granted('DELETE', task) %}
-                            <a class="col btn btn-outline-danger" href="{{ url('task_delete', {id: task.id}) }}" title="{{ 'Delete'|trans }}">
-                                {{ 'Delete'|trans }}
+                            <a class="col btn btn-outline-danger" href="{{ url('task_delete', {id: task.id}) }}" title="{{ 'action.delete'|trans }}">
+                                {{ 'action.delete'|trans }}
                             </a>
                         {% endif %}
                     </td>
@@ -60,21 +60,21 @@
             {{ knp_pagination_render(pagination) }}
             </div>
                 <div class="col-2">
-                    <a class="btn btn-primary" href="{{ url('category_index')}}" title="{{ 'Category List'|trans }}">
-                        {{ 'Category List'|trans }}
+                    <a class="btn btn-primary" href="{{ url('category_index')}}" title="{{ 'action.title.category_list'|trans }}">
+                        {{ 'action.title.category_list'|trans }}
                     </a>
                 </div>
             {% if app.user is not null and 'ROLE_ADMIN' in app.user.roles %}
                 <div class="col-2">
-                    <a class="btn  btn-success" href="{{ url('task_create')}}" title="{{ 'Report New Bug'|trans }}">
-                        {{ 'Report New Bug'|trans }}
+                    <a class="btn  btn-success" href="{{ url('task_create')}}" title="{{ 'action.report_new_bug'|trans }}">
+                        {{ 'action.report_new_bug'|trans }}
                     </a>
                 </div>
             {% endif %}
             <div class="col-2">
             {% if app.request.uri %}
-                <a class="btn btn-outline-primary" href="{{ url('task_index') }}" title="{{ 'Reset Filters'|trans }}">
-                    {{ 'Reset Fiters'|trans }}
+                <a class="btn btn-outline-primary" href="{{ url('task_index') }}" title="{{ 'action.reset_filters'|trans }}">
+                    {{ 'action.reset_filters'|trans }}
                 </a>
             {% endif %}
             </div>

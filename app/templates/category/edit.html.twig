@@ -1,6 +1,6 @@
 {% include 'default/_form.html.twig' with {
-    page_title: 'Edit Category'|trans({'%id%': category.id|default('')}),
+    page_title: 'label.edit_category'|trans({'%id%': category.id|default('')}),
     form: form,
-    submit_label: 'Submit Changes'|trans,
+    submit_label: 'action.save'|trans,
     back_to_list_path: 'category_index',
 } %}

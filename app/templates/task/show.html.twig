@@ -1,29 +1,29 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    {{ 'Bug Details'|trans({'%id%': task.id|default('')}) }}
+    {{ 'title.bug_details'|trans({'%id%': task.id|default('')}) }}
 {% endblock %}
 
 {% block body %}
-    <h1>{{ 'Bug Details'|trans({'%id%': task.id|default('')}) }}</h1>
+    <h1>{{ 'title.bug_details'|trans({'%id%': task.id|default('')}) }}</h1>
     {% if task is defined and task|length %}
         <dl class="dl-horizontal ">
-            <dt>{{ 'Bug_ID'|trans }}</dt>
+            <dt>{{ 'label.id'|trans }}</dt>
             <dd>{{ task.id }}</dd>
-            <dt>{{ 'Added'|trans }}</dt>
+            <dt>{{ 'label.createdAt'|trans }}</dt>
             <dd>{{ task.createdAt|format_date('long') }}</dd>
-            <dt>{{ 'Updated'|trans }}</dt>
+            <dt>{{ 'label.updatedAt'|trans }}</dt>
             <dd>{{ task.updatedAt|format_date('long') }}</dd>
-            <dt>{{ 'Added by'|trans }}</dt>
+            <dt>{{ 'label.reportedBy'|trans }}</dt>
             <dd>{{ task.author.email }}</dd>
-            <dt>{{ 'Title'|trans }}</dt>
+            <dt>{{ 'label.title'|trans }}</dt>
             <dd>{{  task.title }}</dd>
-            <dt>{{ 'Category'|trans }}</dt>
+            <dt>{{ 'label.category'|trans }}</dt>
             <dd>{{  task.category.title }}</dd>
         </dl>
         <p>
-            <a class="btn btn-primary" href="{{ url('task_index') }}" title="{{ 'Return'|trans }}">
-                {{ 'Return'|trans }}
+            <a class="btn btn-primary" href="{{ url('task_index') }}" title="{{ 'action.return'|trans }}">
+                {{ 'action.return'|trans }}
             </a>
         </p>
     {% else %}

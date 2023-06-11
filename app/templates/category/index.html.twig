@@ -1,21 +1,21 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    {{ 'Bug-Trackerr Category List'|trans }}
+    {{ 'label.title_main_category'|trans }}
 {% endblock %}
 
 {% block body %}
-    <h1>{{ 'Category List'|trans }}</h1>
+    <h1>{{ 'title.category_list'|trans }}</h1>
     {% if pagination is defined and pagination.items|length %}
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>{{ knp_pagination_sortable(pagination, 'Category_ID'|trans, 'category.id') }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'Title'|trans, 'category.title') }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'Added'|trans, 'category.createdAt') }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'Updated'|trans, 'category.updatedAt') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label.id_category'|trans, 'category.id') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label.title'|trans, 'category.title') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label.createdAt'|trans, 'category.createdAt') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label.updatedAt'|trans, 'category.updatedAt') }}</th>
                 {% if app.user is not null and 'ROLE_ADMIN' in app.user.roles %}
-                    <th>{{ 'Buttons'|trans }}</th>
+                    <th>{{ 'label.actions'|trans }}</th>
                 {% endif %}
             </tr>
             </thead>
@@ -29,19 +29,19 @@
                     {% if app.user is not null and 'ROLE_ADMIN' in app.user.roles %}
                         <td class="row">
                         <div class="col">
-                            <a class="btn btn-success" href="{{ url('category_show', {id: category.id}) }}" title="{{ 'Details'|trans }}">
-                                {{ 'Details'|trans }}
+                            <a class="btn btn-success" href="{{ url('category_show', {id: category.id}) }}" title="{{ 'action.details'|trans }}">
+                                {{ 'action.details'|trans }}
                             </a>
                         </div>
                         <div class="col">
-                            <a class="btn btn-primary" href="{{ url('category_edit', {id: category.id}) }}" title="{{ 'Edit'|trans }}">
-                                {{ 'Edit'|trans }}
+                            <a class="btn btn-primary" href="{{ url('category_edit', {id: category.id}) }}" title="{{ 'action.edit'|trans }}">
+                                {{ 'action.edit'|trans }}
                             </a>
                         </div>
 
                         <div class="col">
-                            <a class="btn btn-danger" href="{{ url('category_delete', {id: category.id}) }}" title="{{ 'Delete'|trans }}">
-                                {{ 'Delete'|trans }}
+                            <a class="btn btn-danger" href="{{ url('category_delete', {id: category.id}) }}" title="{{ 'action.delete'|trans }}">
+                                {{ 'action.delete'|trans }}
                             </a>
                         </div>
 
@@ -57,14 +57,14 @@
             {{ knp_pagination_render(pagination) }}
             </div>
             <div class="col-2">
-                <a class="btn btn-primary ml-5" href="{{ url('task_index')}}" title="{{ 'Bugs List'|trans }}">
-                    {{ 'Bug List'|trans }}
+                <a class="btn btn-primary ml-5" href="{{ url('task_index')}}" title="{{ 'action.title.bug_list'|trans }}">
+                    {{ 'action.title.bug_list'|trans }}
                 </a>
             </div>
             {% if app.user is not null and 'ROLE_ADMIN' in app.user.roles %}
                 <div class="col-2">
-                    <a class="btn btn-primary" href="{{ url('category_create')}}" title="{{ 'New Category'|trans }}">
-                        {{ 'New Category'|trans }}
+                    <a class="btn btn-primary" href="{{ url('category_create')}}" title="{{ 'action.create_category'|trans }}">
+                        {{ 'action.create_category'|trans }}
                     </a>
                 </div>
             {% endif %}
