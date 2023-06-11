@@ -85,11 +85,8 @@ class TaskService implements TaskServiceInterface
      *
      * @return PaginationInterface<SlidingPagination> Paginated list
      */
-    public function getPaginatedList(int $page, User $author, array $filters = []): PaginationInterface
+    public function getPaginatedList(int $page, ?User $author, array $filters = []): PaginationInterface
     {
-        if ($author === null) {
-
-        }
         $filters = $this->prepareFilters($filters);
 
         return $this->paginator->paginate(

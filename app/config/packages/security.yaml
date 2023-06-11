@@ -44,10 +44,15 @@ security:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
         - { path: ^/login, roles: PUBLIC_ACCESS}
-        - { path: ^/task, roles: PUBLIC_ACCESS }
-        - { path: ^/category, roles: ROLE_ADMIN }
-        - { path: ^/, roles: ROLE_USER}
-
+        - { path: '^/task$', roles: PUBLIC_ACCESS }
+        - { path: '^/task/create$', roles: ROLE_ADMIN }
+        - { path: '^/task/[1-9]+$', roles: PUBLIC_ACCESS }
+        - { path: '^/task/[1-9]+/edit$', roles: ROLE_ADMIN }
+        - { path: '^/task/[1-9]+/delete$', roles: ROLE_ADMIN }
+        - { path: ^/category/[ 1-9 ]*, roles: ROLE_ADMIN }
+        - { path: ^/category, roles: PUBLIC_ACCESS }
+        - { path: ^/change-email, roles: ROLE_ADMIN }
+        - { path: ^/change-password, roles: ROLE_ADMIN }
 when@test:
     security:
         password_hashers:

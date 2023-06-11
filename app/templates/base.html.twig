@@ -26,8 +26,21 @@
                 <div class="col">
                     <h5 class="fw-light pt-2"> {{ app.user.userIdentifier }} </h5>
                 </div>
+                {% if 'ROLE_ADMIN' in app.user.roles %}
                 <div class="col">
-                <a class="btn btn-primary" href="{{ path('app_logout') }}">Logout</a>
+                    <a class="btn btn-primary text-nowrap" href="{{ path('user_change_email') }}">Change email</a>
+                </div>
+                <div class="col">
+                    <a class="btn btn-primary text-nowrap" href="{{ path('user_change_password') }}">Change password</a>
+                </div>
+                {% endif %}
+                <div class="col">
+                    <a class="btn btn-primary" href="{{ path('app_logout') }}">Logout</a>
+                </div>
+            {% endif %}
+            {% if app.user is null %}
+                <div class="col">
+                    <a class="btn btn-primary" href="{{ path('app_login') }}">Sign In</a>
                 </div>
             {% endif %}
         </div>

@@ -1,20 +1,21 @@
 <?php
 /**
- * User Password type.
+ * Change Info type.
  */
 
 namespace App\Form\Type;
 
-use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Email;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
- * Class CategoryType.
+ * Class ChangeInfoType.
  */
-class UserPasswordType extends AbstractType
+class ChangeInfoType extends AbstractType
 {
     /**
      * Builds the form.
@@ -30,13 +31,16 @@ class UserPasswordType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add(
-            'password',
-            PasswordType::class,
+            'email',
+            EmailType::class,
             [
-                'label' => 'label.title',
-                'required' => true,
-                'attr' => ['max_length' => 64],
-            ]);
+                'label' => 'label.email',
+                'constraints' => [
+                    new NotBlank(),
+                    new Email(),
+                ],
+            ]
+        );
     }
 
     /**
@@ -46,7 +50,7 @@ class UserPasswordType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefaults(['data_class' => Category::class]);
+        $resolver->setDefaults([]);
     }
 
     /**
@@ -59,6 +63,6 @@ class UserPasswordType extends AbstractType
      */
     public function getBlockPrefix(): string
     {
-        return 'category';
+        return 'change_info';
     }
 }

@@ -10,11 +10,13 @@
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>{{ knp_pagination_sortable(pagination, 'Category_ID'|trans, 'Category_ID') }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'Title'|trans, 'Title') }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'Added'|trans, 'Added') }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'Updated'|trans, 'Updated') }}</th>
-                <th>{{ 'Buttons'|trans }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'Category_ID'|trans, 'category.id') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'Title'|trans, 'category.title') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'Added'|trans, 'category.createdAt') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'Updated'|trans, 'category.updatedAt') }}</th>
+                {% if app.user is not null and 'ROLE_ADMIN' in app.user.roles %}
+                    <th>{{ 'Buttons'|trans }}</th>
+                {% endif %}
             </tr>
             </thead>
             <tbody>
@@ -24,7 +26,8 @@
                     <td>{{ category.title }}</td>
                     <td>{{ category.createdAt|format_date('long') }}</td>
                     <td>{{ category.updatedAt|format_date('long') }}</td>
-                    <td class="row">
+                    {% if app.user is not null and 'ROLE_ADMIN' in app.user.roles %}
+                        <td class="row">
                         <div class="col">
                             <a class="btn btn-success" href="{{ url('category_show', {id: category.id}) }}" title="{{ 'Details'|trans }}">
                                 {{ 'Details'|trans }}
@@ -43,6 +46,7 @@
                         </div>
 
                     </td>
+                    {% endif %}
                 </tr>
             {% endfor %}
             </tbody>
@@ -53,15 +57,17 @@
             {{ knp_pagination_render(pagination) }}
             </div>
             <div class="col-2">
-                <a class="btn btn-primary" href="{{ url('category_create')}}" title="{{ 'New Category'|trans }}">
-                    {{ 'New Category'|trans }}
-                </a>
-            </div>
-            <div class="col-2">
                 <a class="btn btn-primary ml-5" href="{{ url('task_index')}}" title="{{ 'Bugs List'|trans }}">
-                    {{ 'Bugs List'|trans }}
+                    {{ 'Bug List'|trans }}
                 </a>
             </div>
+            {% if app.user is not null and 'ROLE_ADMIN' in app.user.roles %}
+                <div class="col-2">
+                    <a class="btn btn-primary" href="{{ url('category_create')}}" title="{{ 'New Category'|trans }}">
+                        {{ 'New Category'|trans }}
+                    </a>
+                </div>
+            {% endif %}
         </div>
 
     {% else %}

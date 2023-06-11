@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block body %}
-    <h1 class="fw-semibold fs-2">{{ 'Bugs list'|trans }}</h1>
+    <h1 class="fw-semibold fs-2">{{ 'Bug list'|trans }}</h1>
     {% if pagination is defined and pagination.items|length %}
         <table class="table table-striped">
             <thead>
@@ -59,18 +59,18 @@
             <div class="col-4">
             {{ knp_pagination_render(pagination) }}
             </div>
-            {% if 'ROLE_ADMIN' in app.user.roles %}
                 <div class="col-2">
                     <a class="btn btn-primary" href="{{ url('category_index')}}" title="{{ 'Category List'|trans }}">
                         {{ 'Category List'|trans }}
                     </a>
                 </div>
+            {% if app.user is not null and 'ROLE_ADMIN' in app.user.roles %}
+                <div class="col-2">
+                    <a class="btn  btn-success" href="{{ url('task_create')}}" title="{{ 'Report New Bug'|trans }}">
+                        {{ 'Report New Bug'|trans }}
+                    </a>
+                </div>
             {% endif %}
-            <div class="col-2">
-                <a class="btn  btn-success" href="{{ url('task_create')}}" title="{{ 'Report New Bug'|trans }}">
-                    {{ 'Report New Bug'|trans }}
-                </a>
-            </div>
             <div class="col-2">
             {% if app.request.uri %}
                 <a class="btn btn-outline-primary" href="{{ url('task_index') }}" title="{{ 'Reset Filters'|trans }}">
