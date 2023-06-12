@@ -3,18 +3,19 @@
  * Status fixtures.
  */
 
-
 namespace App\DataFixtures;
 
 use App\Entity\Status;
 
 /**
+ * Class StatusFixtures.
  *
+ * @psalm-suppress MissingConstructor
  */
 class StatusFixtures extends AbstractBaseFixtures
 {
     /**
-     * @return void
+     * Load Data.
      */
     public function loadData(): void
     {

@@ -19,7 +19,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 class Status
 {
     /**
-     * @var int|null
+     * Primary key.
      */
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -27,13 +27,15 @@ class Status
     private ?int $id = null;
 
     /**
-     * @var string|null
+     * Status.
      */
     #[ORM\Column(length: 20)]
     private ?string $status = null;
 
     /**
-     * @return int|null
+     * Getter for Id.
+     *
+     * @return int|null ?int
      */
     public function getId(): ?int
     {
@@ -41,7 +43,9 @@ class Status
     }
 
     /**
-     * @return string|null
+     * Getter for Status.
+     *
+     * @return string|null ?string
      */
     public function getStatus(): ?string
     {
@@ -49,9 +53,9 @@ class Status
     }
 
     /**
-     * @param string|null $status
+     * Setter for Status.
      *
-     * @return void
+     * @param ?string $status status
      */
     public function setStatus(?string $status): void
     {

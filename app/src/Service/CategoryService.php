@@ -21,9 +21,6 @@ class CategoryService implements CategoryServiceInterface
      */
     private CategoryRepository $categoryRepository;
 
-    /**
-     * @var BugRepository
-     */
     private BugRepository $bugRepository;
 
     /**
@@ -65,8 +62,6 @@ class CategoryService implements CategoryServiceInterface
      * Save entity.
      *
      * @param Category $category Category entity
-     *
-     * @return void
      */
     public function save(Category $category): void
     {
@@ -80,9 +75,9 @@ class CategoryService implements CategoryServiceInterface
     }// end save()
 
     /**
-     * @param Category $category
+     * Delete category.
      *
-     * @return void
+     * @param Category $category category
      */
     public function delete(Category $category): void
     {

@@ -58,7 +58,6 @@ class ChangePasswordController extends AbstractController
     {
         $user = $this->getUser();
 
-        // Not logged in, cannot change password
         if (!$user instanceof User) {
             throw new AccessDeniedException();
         }

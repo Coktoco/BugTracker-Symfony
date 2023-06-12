@@ -1,8 +1,8 @@
 <?php
-
 /*
  * User Repository.
  */
+
 namespace App\Repository;
 
 use App\Entity\User;
@@ -23,7 +23,9 @@ use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 class UserRepository extends ServiceEntityRepository implements PasswordUpgraderInterface
 {
     /**
-     * @param ManagerRegistry $registry
+     * User constructor.
+     *
+     * @param ManagerRegistry $registry Manager register
      */
     public function __construct(ManagerRegistry $registry)
     {
@@ -31,10 +33,10 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     }
 
     /**
-     * @param User $entity
-     * @param bool $flush
+     * Save user.
      *
-     * @return void
+     * @param User $entity user
+     * @param bool $flush  flush
      */
     public function save(User $entity, bool $flush = false): void
     {
@@ -46,10 +48,10 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     }
 
     /**
-     * @param User $entity
-     * @param bool $flush
+     * Remove user.
      *
-     * @return void
+     * @param User $entity user
+     * @param bool $flush  flush
      */
     public function remove(User $entity, bool $flush = false): void
     {

@@ -109,10 +109,12 @@ class BugRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param StatusInterface $status
-     * @param array           $filters
+     * Query bugs by Status.
      *
-     * @return QueryBuilder
+     * @param StatusInterface $status  status
+     * @param array           $filters filters
+     *
+     * @return QueryBuilder Query builder
      */
     public function queryByStatus(StatusInterface $status, array $filters = []): QueryBuilder
     {

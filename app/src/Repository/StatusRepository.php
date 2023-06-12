@@ -1,8 +1,8 @@
 <?php
-
 /*
  * Status repository.
  */
+
 namespace App\Repository;
 
 use App\Entity\Status;
@@ -31,7 +31,9 @@ class StatusRepository extends ServiceEntityRepository
     public const PAGINATOR_ITEMS_PER_PAGE = 3;
 
     /**
-     * @param ManagerRegistry $registry
+     *  Status constructor.
+     *
+     * @param ManagerRegistry $registry Manager registry
      */
     public function __construct(ManagerRegistry $registry)
     {
@@ -39,10 +41,10 @@ class StatusRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param Status $entity
-     * @param bool   $flush
+     * Save status.
      *
-     * @return void
+     * @param Status $entity status
+     * @param bool   $flush  flush
      */
     public function save(Status $entity, bool $flush = false): void
     {
@@ -54,10 +56,10 @@ class StatusRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param Status $entity
-     * @param bool   $flush
+     * Remove status.
      *
-     * @return void
+     * @param Status $entity status
+     * @param bool   $flush  flush
      */
     public function remove(Status $entity, bool $flush = false): void
     {

@@ -30,9 +30,9 @@ interface CategoryServiceInterface
     public function save(Category $category): void;
 
     /**
-     * @param Category $category
+     * Delete category.
      *
-     * @return void
+     * @param Category $category category
      */
     public function delete(Category $category): void;
 

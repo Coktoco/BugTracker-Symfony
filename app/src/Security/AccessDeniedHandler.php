@@ -1,5 +1,4 @@
 <?php
-
 /*
  *  Access Denied Handler
  */
@@ -12,15 +11,17 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Http\Authorization\AccessDeniedHandlerInterface;
 
 /**
- * Class AccessDeniedHandler
+ * Class AccessDeniedHandler.
  */
 class AccessDeniedHandler implements AccessDeniedHandlerInterface
 {
     /**
-     * @param Request               $request
-     * @param AccessDeniedException $accessDeniedException
+     * Access denied handler.
      *
-     * @return Response|null
+     * @param Request               $request               request
+     * @param AccessDeniedException $accessDeniedException AccessDeniedException
+     *
+     * @return Response|null ?Response
      */
     public function handle(Request $request, AccessDeniedException $accessDeniedException): ?Response
     {

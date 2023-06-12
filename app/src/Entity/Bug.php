@@ -6,7 +6,6 @@
 namespace App\Entity;
 
 use App\Repository\BugRepository;
-use DateTimeImmutable;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -56,8 +55,6 @@ class Bug
 
     /**
      * Category.
-     *
-     * @var Category
      */
     #[ORM\ManyToOne(targetEntity: Category::class)]
     #[ORM\JoinColumn(nullable: false)]
@@ -73,14 +70,14 @@ class Bug
     private ?User $author;
 
     /**
-     * @var Status|null
+     * @var Status|null Status
      */
     #[ORM\ManyToOne(targetEntity: Status::class)]
     #[ORM\JoinColumn(nullable: true)]
     private ?Status $status = null;
 
     /**
-     * @var string|null
+     * @var string|null Email
      */
     #[ORM\Column(type: Types::TEXT)]
     private ?string $content = null;
@@ -156,7 +153,9 @@ class Bug
     }
 
     /**
-     * @return Category|null
+     * Getter for Category.
+     *
+     * @return Category|null Category
      */
     public function getCategory(): ?Category
     {
@@ -164,19 +163,19 @@ class Bug
     }
 
     /**
-     * @param Category|null $category
+     * Setter for Category.
      *
-     * @return $this
+     * @param ?Category $category category
      */
-    public function setCategory(?Category $category): self
+    public function setCategory(?Category $category): void
     {
         $this->category = $category;
-
-        return $this;
     }
 
     /**
-     * @return User|null
+     * Getter for Author.
+     *
+     * @return User|null User
      */
     public function getAuthor(): ?User
     {
@@ -184,19 +183,19 @@ class Bug
     }
 
     /**
-     * @param User|null $author
+     * Setter for Author.
      *
-     * @return $this
+     * @param ?User $author author
      */
-    public function setAuthor(?User $author): self
+    public function setAuthor(?User $author): void
     {
         $this->author = $author;
-
-        return $this;
     }
 
     /**
-     * @return Status|null
+     * Getter for Status.
+     *
+     * @return Status|null Status
      */
     public function getStatus(): ?Status
     {
@@ -204,19 +203,19 @@ class Bug
     }
 
     /**
-     * @param Status|null $status
+     * Setter for Status.
      *
-     * @return $this
+     * @param ?Status $status status
      */
-    public function setStatus(?Status $status): self
+    public function setStatus(?Status $status): void
     {
         $this->status = $status;
-
-        return $this;
     }
 
     /**
-     * @return string|null
+     * Getter for Content.
+     *
+     * @return string|null Content
      */
     public function getContent(): ?string
     {
@@ -224,14 +223,12 @@ class Bug
     }
 
     /**
-     * @param string $content
+     * Setter for Content.
      *
-     * @return $this
+     * @param string $content Content
      */
-    public function setContent(string $content): self
+    public function setContent(string $content): void
     {
         $this->content = $content;
-
-        return $this;
     }
 }

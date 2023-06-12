@@ -9,7 +9,6 @@ use App\Entity\Category;
 use App\Entity\Bug;
 use App\Entity\User;
 use App\Entity\Status;
-use DateTimeImmutable;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
 /**
@@ -34,12 +33,12 @@ class BugFixtures extends AbstractBaseFixtures implements DependentFixtureInterf
             $bug = new Bug();
             $bug->setTitle($this->faker->sentence);
             $bug->setCreatedAt(
-                DateTimeImmutable::createFromMutable(
+                \DateTimeImmutable::createFromMutable(
                     $this->faker->dateTimeBetween('-100 days', '-1 days')
                 )
             );
             $bug->setUpdatedAt(
-                DateTimeImmutable::createFromMutable(
+                \DateTimeImmutable::createFromMutable(
                     $this->faker->dateTimeBetween('-100 days', '-1 days')
                 )
             );
@@ -55,7 +54,7 @@ class BugFixtures extends AbstractBaseFixtures implements DependentFixtureInterf
             $author = $this->getRandomReference('admins');
             $bug->setAuthor($author);
 
-            /** @var Content $content */
+            /* @var Content $content */
             $bug->setContent($this->faker->text);
 
             return $bug;

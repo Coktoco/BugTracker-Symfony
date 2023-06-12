@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Entry Point Authentication
  */
@@ -14,7 +13,7 @@ use Symfony\Component\Security\Http\EntryPoint\AuthenticationEntryPointInterface
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- * Class AuthenticationEntryPoint
+ * Class AuthenticationEntryPoint.
  */
 class AuthenticationEntryPoint implements AuthenticationEntryPointInterface
 {
@@ -24,17 +23,21 @@ class AuthenticationEntryPoint implements AuthenticationEntryPointInterface
     private TranslatorInterface $translator;
 
     /**
-     * @param UrlGeneratorInterface $urlGenerator
+     * Constructor.
+     *
+     * @param UrlGeneratorInterface $urlGenerator Url Generator
      */
     public function __construct(private UrlGeneratorInterface $urlGenerator)
     {
     }
 
     /**
-     * @param Request                      $request
-     * @param AuthenticationException|null $authException
+     * Start the authentication.
      *
-     * @return RedirectResponse
+     * @param Request                      $request       request
+     * @param AuthenticationException|null $authException authException
+     *
+     * @return RedirectResponse Redirect response
      */
     public function start(Request $request, AuthenticationException $authException = null): RedirectResponse
     {
