@@ -40,8 +40,6 @@ class BugVoter extends Voter
 
     /**
      * Security helper.
-     *
-     * @var Security
      */
     private Security $security;
 
@@ -101,7 +99,7 @@ class BugVoter extends Voter
     /**
      * Checks if user can edit bug.
      *
-     * @param Bug $bug Bug entity
+     * @param Bug  $bug  Bug entity
      * @param User $user User
      *
      * @return bool Result
@@ -114,7 +112,7 @@ class BugVoter extends Voter
     /**
      * Checks if user can view bug.
      *
-     * @param Bug $bug Bug entity
+     * @param Bug  $bug  Bug entity
      * @param User $user User
      *
      * @return bool Result
@@ -127,7 +125,7 @@ class BugVoter extends Voter
     /**
      * Checks if user can delete bug.
      *
-     * @param Bug $bug Bug entity
+     * @param Bug  $bug  Bug entity
      * @param User $user User
      *
      * @return bool Result
@@ -136,5 +134,4 @@ class BugVoter extends Voter
     {
         return $bug->getAuthor() === $user;
     }
-
 }

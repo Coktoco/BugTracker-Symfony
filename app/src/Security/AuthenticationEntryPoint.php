@@ -1,5 +1,9 @@
 <?php
 
+/*
+ * Entry Point Authentication
+ */
+
 namespace App\Security;
 
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -8,27 +12,35 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Http\EntryPoint\AuthenticationEntryPointInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-
-
+/**
+ * Class AuthenticationEntryPoint
+ */
 class AuthenticationEntryPoint implements AuthenticationEntryPointInterface
-    {
+{
     /**
      * Translator.
      */
     private TranslatorInterface $translator;
 
-    public function __construct(
-    private UrlGeneratorInterface $urlGenerator,
-    ) {
+    /**
+     * @param UrlGeneratorInterface $urlGenerator
+     */
+    public function __construct(private UrlGeneratorInterface $urlGenerator)
+    {
     }
 
+    /**
+     * @param Request                      $request
+     * @param AuthenticationException|null $authException
+     *
+     * @return RedirectResponse
+     */
     public function start(Request $request, AuthenticationException $authException = null): RedirectResponse
     {
-    // add a custom flash message and redirect to the login page
-    $request->getSession()->getFlashBag()->add('note', 'You have to login in order to access this page.');
+        // add a custom flash message and redirect to the login page
+        $request->getSession()->getFlashBag()->add('note', 'You have to login in order to access this page.');
 
-    return new RedirectResponse($this->urlGenerator->generate('app_login'));
+        return new RedirectResponse($this->urlGenerator->generate('app_login'));
     }
 }

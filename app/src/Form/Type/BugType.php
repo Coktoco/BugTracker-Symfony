@@ -39,14 +39,16 @@ class BugType extends AbstractType
                 'label' => 'label.title',
                 'required' => true,
                 'attr' => ['max_length' => 255],
-            ]);
+            ]
+        );
         $builder->add(
             'content',
             TextType::class,
             [
                 'label' => 'label.content',
                 'required' => true,
-            ]);
+            ]
+        );
         $builder->add(
             'category',
             EntityType::class,
@@ -58,7 +60,8 @@ class BugType extends AbstractType
                 'label' => 'label.category',
                 'placeholder' => 'label.none',
                 'required' => true,
-            ]);
+            ]
+        );
         $builder->add(
             'status',
             EntityType::class,
@@ -70,7 +73,8 @@ class BugType extends AbstractType
                 'label' => 'label.status',
                 'placeholder' => 'label.none',
                 'required' => true,
-            ]);
+            ]
+        );
     }
 
     /**

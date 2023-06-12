@@ -28,8 +28,6 @@ class CategoryController extends AbstractController
 
     /**
      * Translator.
-     *
-     * @var TranslatorInterface
      */
     private TranslatorInterface $translator;
 
@@ -155,6 +153,7 @@ class CategoryController extends AbstractController
             ]
         );
     }
+
     // ...
     /**
      * Delete action.
@@ -180,7 +179,6 @@ class CategoryController extends AbstractController
             'method' => 'DELETE',
             'action' => $this->generateUrl('category_delete', ['id' => $category->getId()]),
         ]);
-
 
         $form->handleRequest($request);
 

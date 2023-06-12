@@ -18,6 +18,74 @@ use Knp\Component\Pager\PaginatorInterface;
 class BugService implements BugServiceInterface
 {
     /**
+     * Constructor.
+     *
+     * @param CategoryServiceInterface $categoryService Category service
+     * @param PaginatorInterface       $paginator       Paginator
+     * @param BugRepository            $bugRepository   Bug repository
+     */
+    public function __construct(CategoryServiceInterface $categoryService, PaginatorInterface $paginator, BugRepository $bugRepository)
+    {
+        $this->categoryService = $categoryService;
+        $this->paginator = $paginator;
+        $this->bugRepository = $bugRepository;
+    }
+
+    /**
+     * Get paginated list.
+     *
+     * @param int                $page    Page number
+     * @param User               $author  Bugs author
+     * @param array<string, int> $filters Filters array
+     *
+     * @return PaginationInterface<SlidingPagination> Paginated list
+     */
+    public function getPaginatedList(int $page, ?User $author, array $filters = []): PaginationInterface
+    {
+        $filters = $this->prepareFilters($filters);
+
+        return $this->paginator->paginate(
+            $this->bugRepository->queryAll($filters),
+            $page,
+            BugRepository::PAGINATOR_ITEMS_PER_PAGE
+        );
+    }
+
+    /**
+     * Save entity.
+     *
+     * @param Bug $bug Bug entity
+     */
+    public function save(Bug $bug): void
+    {
+        $this->bugRepository->save($bug);
+    }
+
+    /**
+     * Delete entity.
+     *
+     * @param Bug $bug Bug entity
+     */
+    public function delete(Bug $bug): void
+    {
+        $this->bugRepository->delete($bug);
+    }
+
+    /**
+     * Find by id.
+     *
+     * @param int $id Bug id
+     *
+     * @return Status|null Bug entity
+     *
+     * @throws NonUniqueResultException
+     */
+    public function findOneByStatus(int $id): ?Bug
+    {
+        return $this->bugRepository->findOneById($id);
+    }
+
+    /**
      * Category service.
      */
     private CategoryServiceInterface $categoryService;
@@ -25,29 +93,12 @@ class BugService implements BugServiceInterface
     /**
      * Bug repository.
      */
-    private BugRepository $taskRepository;
+    private BugRepository $bugRepository;
 
     /**
      * Paginator.
      */
     private PaginatorInterface $paginator;
-
-    /**
-     * Constructor.
-     *
-     * @param CategoryServiceInterface $categoryService Category service
-     * @param PaginatorInterface       $paginator       Paginator
-     * @param BugRepository           $taskRepository  Bug repository
-     */
-    public function __construct(
-        CategoryServiceInterface $categoryService,
-        PaginatorInterface       $paginator,
-        BugRepository            $taskRepository,
-    ) {
-        $this->categoryService = $categoryService;
-        $this->paginator = $paginator;
-        $this->taskRepository = $taskRepository;
-    }
 
     /**
      * Prepare filters for the tasks list.
@@ -67,67 +118,12 @@ class BugService implements BugServiceInterface
         }
 
         if (!empty($filters['status_id'])) {
-            $task = $this->findOneByStatus($filters['status_id']);
-            if (null !== $task) {
-                $resultFilters['status'] = $task;
+            $bug = $this->findOneByStatus($filters['status_id']);
+            if (null !== $bug) {
+                $resultFilters['status'] = $bug;
             }
         }
 
         return $resultFilters;
     }
-
-    /**
-     * Get paginated list.
-     *
-     * @param int                $page    Page number
-     * @param User               $author  Tasks author
-     * @param array<string, int> $filters Filters array
-     *
-     * @return PaginationInterface<SlidingPagination> Paginated list
-     */
-    public function getPaginatedList(int $page, ?User $author, array $filters = []): PaginationInterface
-    {
-        $filters = $this->prepareFilters($filters);
-
-        return $this->paginator->paginate(
-            $this->taskRepository->queryAll($filters),
-            $page,
-            BugRepository::PAGINATOR_ITEMS_PER_PAGE
-        );
-    }
-
-    /**
-     * Save entity.
-     *
-     * @param Bug $task Bug entity
-     */
-    public function save(Bug $task): void
-    {
-        $this->taskRepository->save($task);
-    }
-
-    /**
-     * Delete entity.
-     *
-     * @param Bug $task Bug entity
-     */
-    public function delete(Bug $task): void
-    {
-        $this->taskRepository->delete($task);
-    }
-
-    /**
-     * Find by id.
-     *
-     * @param int $status bug.status Status
-     *
-     * @return Status|null Bug entity
-     *
-     * @throws NonUniqueResultException
-     */
-    public function findOneByStatus(int $id): ?Bug
-    {
-        return $this->taskRepository->findOneById($id);
-    }
-
 }

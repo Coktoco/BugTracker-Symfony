@@ -84,7 +84,7 @@
       </trans-unit>
       <trans-unit id="label.logged_info">
         <source>label.logged_info</source>
-        <target>You are logged in as:</target>
+        <target>You are logged as:</target>
       </trans-unit>
      <trans-unit id="label.create_category">
         <source>label.create_category</source>

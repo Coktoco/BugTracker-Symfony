@@ -7,7 +7,6 @@ namespace App\Service;
 
 use App\Entity\Bug;
 use App\Entity\User;
-use App\Entity\Status;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 
 /**
@@ -18,7 +17,9 @@ interface BugServiceInterface
     /**
      * Get paginated list.
      *
-     * @param int $page Page number
+     * @param int   $page    Page number
+     * @param User  $author  Bug author
+     * @param array $filters Bug filter
      *
      * @return PaginationInterface<SlidingPagination> Paginated list
      */
@@ -27,14 +28,14 @@ interface BugServiceInterface
     /**
      * Save entity.
      *
-     * @param Bug $task Bug entity
+     * @param Bug $bug Bug entity
      */
-    public function save(Bug $task): void;
+    public function save(Bug $bug): void;
 
     /**
      * Delete entity.
      *
-     * @param Bug $task Bug entity
+     * @param Bug $bug Bug entity
      */
-    public function delete(Bug $task): void;
+    public function delete(Bug $bug): void;
 }

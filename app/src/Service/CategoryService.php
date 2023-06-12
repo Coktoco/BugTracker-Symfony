@@ -16,40 +16,39 @@ use App\Repository\BugRepository;
  */
 class CategoryService implements CategoryServiceInterface
 {
-
     /**
      * Category repository.
      */
     private CategoryRepository $categoryRepository;
 
-    private BugRepository $taskRepository;
+    /**
+     * @var BugRepository
+     */
+    private BugRepository $bugRepository;
 
     /**
      * Paginator.
      */
     private PaginatorInterface $paginator;
 
-
     /**
      * Constructor.
      *
-     * @param CategoryRepository $categoryRepository Category repository.
-     * @param PaginatorInterface $paginator          Paginator.
-     * @param BugRepository     $taskRepository     Bug repository.
+     * @param CategoryRepository $categoryRepository category repository
+     * @param BugRepository      $bugRepository      bug repository
+     * @param PaginatorInterface $paginator          paginator
      */
-    public function __construct(CategoryRepository $categoryRepository, BugRepository $taskRepository, PaginatorInterface $paginator)
+    public function __construct(CategoryRepository $categoryRepository, BugRepository $bugRepository, PaginatorInterface $paginator)
     {
-        $this->taskRepository     = $taskRepository;
+        $this->bugRepository = $bugRepository;
         $this->categoryRepository = $categoryRepository;
-        $this->paginator          = $paginator;
-
-    }//end __construct()
-
+        $this->paginator = $paginator;
+    }// end __construct()
 
     /**
      * Get paginated list.
      *
-     * @param integer $page Page number
+     * @param int $page Page number
      *
      * @return PaginationInterface<string, mixed> Paginated list
      */
@@ -60,64 +59,53 @@ class CategoryService implements CategoryServiceInterface
             $page,
             CategoryRepository::PAGINATOR_ITEMS_PER_PAGE
         );
-
-    }//end getPaginatedList()
-
+    }// end getPaginatedList()
 
     /**
      * Save entity.
      *
      * @param Category $category Category entity
-     */
-
-
-    /**
-     * Save entity.
      *
-     * @param Category $category Category entity
+     * @return void
      */
     public function save(Category $category): void
     {
-        if (null == $category->getId()) {
+        if (null === $category->getId()) {
             $category->setCreatedAt(new \DateTimeImmutable());
         }
 
         $category->setUpdatedAt(new \DateTimeImmutable());
 
         $this->categoryRepository->save($category);
-
-    }//end save()
-
+    }// end save()
 
     /**
-     * @param  Category $category
+     * @param Category $category
+     *
      * @return void
      */
     public function delete(Category $category): void
     {
         $this->categoryRepository->delete($category);
-
-    }//end delete()
-
+    }// end delete()
 
     /**
      * Can Category be deleted?
      *
      * @param Category $category Category entity
      *
-     * @return boolean Result
+     * @return bool Result
      */
     public function canBeDeleted(Category $category): bool
     {
         try {
-            $result = $this->taskRepository->countByCategory($category);
+            $result = $this->bugRepository->countByCategory($category);
 
             return !($result > 0);
-        } catch (NoResultException | NonUniqueResultException) {
+        } catch (NoResultException|NonUniqueResultException) {
             return false;
         }
-
-    }//end canBeDeleted()
+    }// end canBeDeleted()
 
     /**
      * Find by id.
@@ -132,6 +120,4 @@ class CategoryService implements CategoryServiceInterface
     {
         return $this->categoryRepository->findOneById($id);
     }
-
-
-}//end class
+}// end class

@@ -14,7 +14,6 @@ use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-
 /**
  * Class BugRepository.
  *
@@ -71,29 +70,6 @@ class BugRepository extends ServiceEntityRepository
     }
 
     /**
-     * Apply filters to paginated list.
-     *
-     * @param QueryBuilder          $queryBuilder Query builder
-     * @param array<string, object> $filters      Filters array
-     *
-     * @return QueryBuilder Query builder
-     */
-    private function applyFiltersToList(QueryBuilder $queryBuilder, array $filters = []): QueryBuilder
-    {
-        if (isset($filters['category']) && $filters['category'] instanceof Category) {
-            $queryBuilder->andWhere('category = :category')
-                ->setParameter('category', $filters['category']);
-        }
-
-        if (isset($filters['status']) && $filters['status'] instanceof Status) {
-            $queryBuilder->andWhere('status = :status')
-                ->setParameter('status', $filters['status']);
-        }
-
-        return $queryBuilder;
-    }
-
-    /**
      * Count tasks by category.
      *
      * @param Category $category Category
@@ -132,6 +108,12 @@ class BugRepository extends ServiceEntityRepository
         return $queryBuilder;
     }
 
+    /**
+     * @param StatusInterface $status
+     * @param array           $filters
+     *
+     * @return QueryBuilder
+     */
     public function queryByStatus(StatusInterface $status, array $filters = []): QueryBuilder
     {
         $queryBuilder = $this->queryAll($filters);
@@ -141,7 +123,6 @@ class BugRepository extends ServiceEntityRepository
 
         return $queryBuilder;
     }
-
 
     /**
      * Save entity.
@@ -166,6 +147,29 @@ class BugRepository extends ServiceEntityRepository
     }
 
     /**
+     * Apply filters to paginated list.
+     *
+     * @param QueryBuilder          $queryBuilder Query builder
+     * @param array<string, object> $filters      Filters array
+     *
+     * @return QueryBuilder Query builder
+     */
+    private function applyFiltersToList(QueryBuilder $queryBuilder, array $filters = []): QueryBuilder
+    {
+        if (isset($filters['category']) && $filters['category'] instanceof Category) {
+            $queryBuilder->andWhere('category = :category')
+                ->setParameter('category', $filters['category']);
+        }
+
+        if (isset($filters['status']) && $filters['status'] instanceof Status) {
+            $queryBuilder->andWhere('status = :status')
+                ->setParameter('status', $filters['status']);
+        }
+
+        return $queryBuilder;
+    }
+
+    /**
      * Get or create new query builder.
      *
      * @param QueryBuilder|null $queryBuilder Query builder
@@ -176,5 +180,4 @@ class BugRepository extends ServiceEntityRepository
     {
         return $queryBuilder ?? $this->createQueryBuilder('bug');
     }
-
 }
