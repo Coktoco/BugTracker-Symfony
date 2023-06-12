@@ -266,7 +266,14 @@
           <source>action.return</source>
           <target>Powrót</target>
         </trans-unit>
-
+       <trans-unit id="action.denied_message">
+          <source>action.denied_message</source>
+          <target>Nie masz dostępu do tej części naszego serwisu!</target>
+        </trans-unit>
+       <trans-unit id="access.denied_login_message">
+          <source>access.denied_login_message</source>
+          <target>Musisz się zalogować, aby uzyskać dostęp do tej strony!</target>
+        </trans-unit>
     </body>
   </file>
 </xliff>

@@ -26,9 +26,11 @@ class AuthenticationEntryPoint implements AuthenticationEntryPointInterface
      * Constructor.
      *
      * @param UrlGeneratorInterface $urlGenerator Url Generator
+     * @param TranslatorInterface   $translator   translator
      */
-    public function __construct(private UrlGeneratorInterface $urlGenerator)
+    public function __construct(private UrlGeneratorInterface $urlGenerator, TranslatorInterface $translator)
     {
+        $this->translator = $translator;
     }
 
     /**
@@ -42,7 +44,9 @@ class AuthenticationEntryPoint implements AuthenticationEntryPointInterface
     public function start(Request $request, AuthenticationException $authException = null): RedirectResponse
     {
         // add a custom flash message and redirect to the login page
-        $request->getSession()->getFlashBag()->add('note', 'You have to login in order to access this page.');
+        $message = $this->translator->trans('access.denied_login_message');
+
+        $request->getSession()->getFlashBag()->add('note', $message);
 
         return new RedirectResponse($this->urlGenerator->generate('app_login'));
     }

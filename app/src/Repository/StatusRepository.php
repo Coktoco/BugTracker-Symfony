@@ -10,6 +10,8 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
+ * Class StatusRepository.
+ *
  * @extends ServiceEntityRepository<Status>
  *
  * @method Status|null find($id, $lockMode = null, $lockVersion = null)

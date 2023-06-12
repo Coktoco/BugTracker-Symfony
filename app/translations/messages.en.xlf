@@ -266,7 +266,14 @@
           <source>action.return</source>
           <target>Return To Safety</target>
         </trans-unit>
-
+       <trans-unit id="action.denied_message">
+          <source>action.denied_message</source>
+          <target>You are not allowed to access this part of our site. Retreat immediately!</target>
+        </trans-unit>
+       <trans-unit id="access.denied_login_message">
+          <source>access.denied_login_message</source>
+          <target>You have to login in order to access this page!</target>
+        </trans-unit>
     </body>
   </file>
 </xliff>
