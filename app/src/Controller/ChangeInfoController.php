@@ -72,7 +72,7 @@ class ChangeInfoController extends AbstractController
                 $this->translator->trans('message.email_changed')
             );
 
-            return $this->redirectToRoute('task_index');
+            return $this->redirectToRoute('bug_index');
         }
 
         return $this->render('user/changeInfo.html.twig', [

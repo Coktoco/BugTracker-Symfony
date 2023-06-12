@@ -7,9 +7,18 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Http\EntryPoint\AuthenticationEntryPointInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
+
 
 class AuthenticationEntryPoint implements AuthenticationEntryPointInterface
     {
+    /**
+     * Translator.
+     */
+    private TranslatorInterface $translator;
+
     public function __construct(
     private UrlGeneratorInterface $urlGenerator,
     ) {

@@ -108,7 +108,7 @@
       </trans-unit>
       <trans-unit id="message.created_successfully">
         <source>message.created_successfully</source>
-        <target>Dodano nowe zgłoszenie Buga.</target>
+        <target>Dodano nowe zgłoszenie.</target>
       </trans-unit>
       <trans-unit id="message.category_created_successfully">
         <source>message.category_created_successfully</source>

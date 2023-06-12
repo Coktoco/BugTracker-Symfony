@@ -1,21 +1,21 @@
 <?php
 /**
- * Task service.
+ * Bug service.
  */
 
 namespace App\Service;
 
-use App\Entity\Task;
+use App\Entity\Bug;
 use App\Entity\User;
 use App\Entity\Status;
-use App\Repository\TaskRepository;
+use App\Repository\BugRepository;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
 
 /**
- * Class TaskService.
+ * Class BugService.
  */
-class TaskService implements TaskServiceInterface
+class BugService implements BugServiceInterface
 {
     /**
      * Category service.
@@ -23,9 +23,9 @@ class TaskService implements TaskServiceInterface
     private CategoryServiceInterface $categoryService;
 
     /**
-     * Task repository.
+     * Bug repository.
      */
-    private TaskRepository $taskRepository;
+    private BugRepository $taskRepository;
 
     /**
      * Paginator.
@@ -37,12 +37,12 @@ class TaskService implements TaskServiceInterface
      *
      * @param CategoryServiceInterface $categoryService Category service
      * @param PaginatorInterface       $paginator       Paginator
-     * @param TaskRepository           $taskRepository  Task repository
+     * @param BugRepository           $taskRepository  Bug repository
      */
     public function __construct(
         CategoryServiceInterface $categoryService,
-        PaginatorInterface $paginator,
-        TaskRepository $taskRepository,
+        PaginatorInterface       $paginator,
+        BugRepository            $taskRepository,
     ) {
         $this->categoryService = $categoryService;
         $this->paginator = $paginator;
@@ -92,16 +92,16 @@ class TaskService implements TaskServiceInterface
         return $this->paginator->paginate(
             $this->taskRepository->queryAll($filters),
             $page,
-            TaskRepository::PAGINATOR_ITEMS_PER_PAGE
+            BugRepository::PAGINATOR_ITEMS_PER_PAGE
         );
     }
 
     /**
      * Save entity.
      *
-     * @param Task $task Task entity
+     * @param Bug $task Bug entity
      */
-    public function save(Task $task): void
+    public function save(Bug $task): void
     {
         $this->taskRepository->save($task);
     }
@@ -109,9 +109,9 @@ class TaskService implements TaskServiceInterface
     /**
      * Delete entity.
      *
-     * @param Task $task Task entity
+     * @param Bug $task Bug entity
      */
-    public function delete(Task $task): void
+    public function delete(Bug $task): void
     {
         $this->taskRepository->delete($task);
     }
@@ -119,13 +119,13 @@ class TaskService implements TaskServiceInterface
     /**
      * Find by id.
      *
-     * @param int $status task.status Status
+     * @param int $status bug.status Status
      *
-     * @return Status|null Task entity
+     * @return Status|null Bug entity
      *
      * @throws NonUniqueResultException
      */
-    public function findOneByStatus(int $id): ?Task
+    public function findOneByStatus(int $id): ?Bug
     {
         return $this->taskRepository->findOneById($id);
     }

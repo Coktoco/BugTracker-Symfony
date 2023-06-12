@@ -1,13 +1,13 @@
 <?php
 /**
- * Task controller.
+ * Bug controller.
  */
 
 namespace App\Controller;
 
-use App\Entity\Task;
-use App\Form\Type\TaskType;
-use App\Service\TaskServiceInterface;
+use App\Entity\Bug;
+use App\Form\Type\BugType;
+use App\Service\BugServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,15 +16,15 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- * Class TaskController.
+ * Class BugController.
  */
-#[Route('/task')]
-class TaskController extends AbstractController
+#[Route('/bug')]
+class BugController extends AbstractController
 {
     /**
-     * Task service.
+     * Bug service.
      */
-    private TaskServiceInterface $taskService;
+    private BugServiceInterface $bugService;
 
     /**
      * Translator.
@@ -34,12 +34,12 @@ class TaskController extends AbstractController
     /**
      * Constructor.
      *
-     * @param TaskServiceInterface $taskService Task service
+     * @param BugServiceInterface $bugService Bug service
      * @param TranslatorInterface  $translator  Translator
      */
-    public function __construct(TaskServiceInterface $taskService, TranslatorInterface $translator)
+    public function __construct(BugServiceInterface $bugService, TranslatorInterface $translator)
     {
-        $this->taskService = $taskService;
+        $this->bugService = $bugService;
         $this->translator = $translator;
     }
 
@@ -51,7 +51,7 @@ class TaskController extends AbstractController
      * @return Response HTTP response
      */
     #[Route(
-        name: 'task_index',
+        name: 'bug_index',
         methods: 'GET'
     )]
     public function index(Request $request): Response
@@ -59,13 +59,13 @@ class TaskController extends AbstractController
         $filters = $this->getFilters($request);
         /** @var User $user */
         $user = $this->getUser();
-        $pagination = $this->taskService->getPaginatedList(
+        $pagination = $this->bugService->getPaginatedList(
             $request->query->getInt('page', 1),
             $user,
             $filters
         );
 
-        return $this->render('task/index.html.twig', ['pagination' => $pagination]);
+        return $this->render('bug/index.html.twig', ['pagination' => $pagination]);
     }
     /**
      * Get filters from request.
@@ -88,15 +88,15 @@ class TaskController extends AbstractController
     /**
      * Show action.
      *
-     * @param Task $task Task entity
+     * @param Bug $bug Bug entity
      *
      * @return Response HTTP response
      */
-    #[Route('/{id}', name: 'task_show', requirements: ['id' => '[1-9]\d*'], methods: 'GET' )]
-    //#[IsGranted('VIEW', subject: 'task')]
-    public function show(Task $task): Response
+    #[Route('/{id}', name: 'bug_show', requirements: ['id' => '[1-9]\d*'], methods: 'GET' )]
+    //#[IsGranted('VIEW', subject: 'bug')]
+    public function show(Bug $bug): Response
     {
-        return $this->render('task/show.html.twig', ['task' => $task]);
+        return $this->render('bug/show.html.twig', ['bug' => $bug]);
     }
 
     /**
@@ -106,33 +106,33 @@ class TaskController extends AbstractController
      *
      * @return Response HTTP response
      */
-    #[Route('/create', name: 'task_create', methods: 'GET|POST')]
+    #[Route('/create', name: 'bug_create', methods: 'GET|POST')]
     public function create(Request $request): Response
     {
         /** @var User $user */
         $user = $this->getUser();
-        $task = new Task();
-        $task->setAuthor($user);
+        $bug = new Bug();
+        $bug->setAuthor($user);
         $form = $this->createForm(
-            TaskType::class,
-            $task,
-            ['action' => $this->generateUrl('task_create')]
+            BugType::class,
+            $bug,
+            ['action' => $this->generateUrl('bug_create')]
         );
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->taskService->save($task);
+            $this->bugService->save($bug);
 
             $this->addFlash(
                 'success',
                 $this->translator->trans('message.created_successfully')
             );
 
-            return $this->redirectToRoute('task_index');
+            return $this->redirectToRoute('bug_index');
         }
 
         return $this->render(
-            'task/create.html.twig',
+            'bug/create.html.twig',
             ['form' => $form->createView()]
         );
     }
@@ -141,40 +141,40 @@ class TaskController extends AbstractController
      * Edit action.
      *
      * @param Request $request HTTP request
-     * @param Task    $task    Task entity
+     * @param Bug    $bug    Bug entity
      *
      * @return Response HTTP response
      */
-    #[Route('/{id}/edit', name: 'task_edit', requirements: ['id' => '[1-9]\d*'], methods: 'GET|PUT')]
-    #[IsGranted('EDIT', subject: 'task')]
-    public function edit(Request $request, Task $task): Response
+    #[Route('/{id}/edit', name: 'bug_edit', requirements: ['id' => '[1-9]\d*'], methods: 'GET|PUT')]
+    #[IsGranted('EDIT', subject: 'bug')]
+    public function edit(Request $request, Bug $bug): Response
     {
         $form = $this->createForm(
-            TaskType::class,
-            $task,
+            BugType::class,
+            $bug,
             [
                 'method' => 'PUT',
-                'action' => $this->generateUrl('task_edit', ['id' => $task->getId()]),
+                'action' => $this->generateUrl('bug_edit', ['id' => $bug->getId()]),
             ]
         );
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->taskService->save($task);
+            $this->bugService->save($bug);
 
             $this->addFlash(
                 'success',
                 $this->translator->trans('message.edited_successfully')
             );
 
-            return $this->redirectToRoute('task_index');
+            return $this->redirectToRoute('bug_index');
         }
 
         return $this->render(
-            'task/edit.html.twig',
+            'bug/edit.html.twig',
             [
                 'form' => $form->createView(),
-                'task' => $task,
+                'bug' => $bug,
             ]
         );
     }
@@ -183,40 +183,40 @@ class TaskController extends AbstractController
      * Delete action.
      *
      * @param Request $request HTTP request
-     * @param Task    $task    Task entity
+     * @param Bug    $bug    Bug entity
      *
      * @return Response HTTP response
      */
-    #[Route('/{id}/delete', name: 'task_delete', requirements: ['id' => '[1-9]\d*'], methods: 'GET|DELETE')]
-    #[IsGranted('DELETE', subject: 'task')]
-    public function delete(Request $request, Task $task): Response
+    #[Route('/{id}/delete', name: 'bug_delete', requirements: ['id' => '[1-9]\d*'], methods: 'GET|DELETE')]
+    #[IsGranted('DELETE', subject: 'bug')]
+    public function delete(Request $request, Bug $bug): Response
     {
         $form = $this->createForm(
             FormType::class,
-            $task,
+            $bug,
             [
                 'method' => 'DELETE',
-                'action' => $this->generateUrl('task_delete', ['id' => $task->getId()]),
+                'action' => $this->generateUrl('bug_delete', ['id' => $bug->getId()]),
             ]
         );
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->taskService->delete($task);
+            $this->bugService->delete($bug);
 
             $this->addFlash(
                 'success',
                 $this->translator->trans('message.deleted_successfully')
             );
 
-            return $this->redirectToRoute('task_index');
+            return $this->redirectToRoute('bug_index');
         }
 
         return $this->render(
-            'task/delete.html.twig',
+            'bug/delete.html.twig',
             [
                 'form' => $form->createView(),
-                'task' => $task,
+                'bug' => $bug,
             ]
         );
     }

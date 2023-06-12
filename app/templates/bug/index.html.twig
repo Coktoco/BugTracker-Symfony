@@ -10,11 +10,11 @@
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>{{ knp_pagination_sortable(pagination, 'label.id'|trans, 'task.id') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label.id'|trans, 'bug.id') }}</th>
                 <th>{{ 'label.reportedBy'|trans }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'label.createdAt'|trans, 'task.createdAt') }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'label.updatedAt'|trans, 'task.updatedAt') }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'label.title'|trans, 'task.title') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label.createdAt'|trans, 'bug.createdAt') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label.updatedAt'|trans, 'bug.updatedAt') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label.title'|trans, 'bug.title') }}</th>
                 <th>{{ 'label.currentStatus'|trans }}</th>
                 <th>{{ 'label.category'|trans }}</th>
                 <th>{{ 'label.actions'|trans }}</th>
@@ -22,30 +22,30 @@
             </tr>
             </thead>
             <tbody>
-            {% for task in pagination.items %}
+            {% for bug in pagination.items %}
                 <tr>
-                    <td>{{ task.id }}</td>
-                    <td>{{ task.author.email }}</td>
-                    <td>{{ task.createdAt|format_date('long') }}</td>
-                    <td>{{ task.updatedAt|format_date('long') }}</td>
-                    <td>{{ task.title }}</td>
-                    <td>{{ task.status.status }}</td>
+                    <td>{{ bug.id }}</td>
+                    <td>{{ bug.author.email }}</td>
+                    <td>{{ bug.createdAt|format_date('long') }}</td>
+                    <td>{{ bug.updatedAt|format_date('long') }}</td>
+                    <td>{{ bug.title }}</td>
+                    <td>{{ bug.status.status }}</td>
                     <td>
-                        <a href="{{ url('task_index', {'filters.category_id' : task.category.id}) }}" title="{{ task.category.title }}">
-                            {{ task.category.title }}
+                        <a href="{{ url('bug_index', {'filters.category_id' : bug.category.id}) }}" title="{{ bug.category.title }}">
+                            {{ bug.category.title }}
                         </a>
                     </td>
                     <td class=row">
-                            <a class="col btn btn-outline-primary" href="{{ url('task_show', {id: task.id}) }}" title="{{ 'action.details'|trans }}">
+                            <a class="col btn btn-outline-primary" href="{{ url('bug_show', {id: bug.id}) }}" title="{{ 'action.details'|trans }}">
                                 {{ 'action.details'|trans }}
                             </a>
-                        {% if is_granted('EDIT', task) %}
-                            <a class="col btn btn-outline-success" href="{{ url('task_edit', {id: task.id}) }}" title="{{ 'action.edit'|trans }}">
+                        {% if is_granted('EDIT', bug) %}
+                            <a class="col btn btn-outline-success" href="{{ url('bug_edit', {id: bug.id}) }}" title="{{ 'action.edit'|trans }}">
                                 {{ 'action.edit'|trans }}
                             </a>
                         {% endif %}
-                        {% if is_granted('DELETE', task) %}
-                            <a class="col btn btn-outline-danger" href="{{ url('task_delete', {id: task.id}) }}" title="{{ 'action.delete'|trans }}">
+                        {% if is_granted('DELETE', bug) %}
+                            <a class="col btn btn-outline-danger" href="{{ url('bug_delete', {id: bug.id}) }}" title="{{ 'action.delete'|trans }}">
                                 {{ 'action.delete'|trans }}
                             </a>
                         {% endif %}
@@ -66,14 +66,14 @@
                 </div>
             {% if app.user is not null and 'ROLE_ADMIN' in app.user.roles %}
                 <div class="col-2">
-                    <a class="btn  btn-success" href="{{ url('task_create')}}" title="{{ 'action.report_new_bug'|trans }}">
+                    <a class="btn  btn-success" href="{{ url('bug_create')}}" title="{{ 'action.report_new_bug'|trans }}">
                         {{ 'action.report_new_bug'|trans }}
                     </a>
                 </div>
             {% endif %}
             <div class="col-2">
             {% if app.request.uri %}
-                <a class="btn btn-outline-primary" href="{{ url('task_index') }}" title="{{ 'action.reset_filters'|trans }}">
+                <a class="btn btn-outline-primary" href="{{ url('bug_index') }}" title="{{ 'action.reset_filters'|trans }}">
                     {{ 'action.reset_filters'|trans }}
                 </a>
             {% endif %}

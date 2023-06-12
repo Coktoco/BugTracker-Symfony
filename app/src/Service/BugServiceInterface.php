@@ -1,19 +1,19 @@
 <?php
 /**
- * Task service interface.
+ * Bug service interface.
  */
 
 namespace App\Service;
 
-use App\Entity\Task;
+use App\Entity\Bug;
 use App\Entity\User;
 use App\Entity\Status;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 
 /**
- * Interface TaskServiceInterface.
+ * Interface BugServiceInterface.
  */
-interface TaskServiceInterface
+interface BugServiceInterface
 {
     /**
      * Get paginated list.
@@ -27,14 +27,14 @@ interface TaskServiceInterface
     /**
      * Save entity.
      *
-     * @param Task $task Task entity
+     * @param Bug $task Bug entity
      */
-    public function save(Task $task): void;
+    public function save(Bug $task): void;
 
     /**
      * Delete entity.
      *
-     * @param Task $task Task entity
+     * @param Bug $task Bug entity
      */
-    public function delete(Task $task): void;
+    public function delete(Bug $task): void;
 }

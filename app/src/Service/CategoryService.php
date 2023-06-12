@@ -9,7 +9,7 @@ use App\Entity\Category;
 use App\Repository\CategoryRepository;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
-use App\Repository\TaskRepository;
+use App\Repository\BugRepository;
 
 /**
  * Class CategoryService.
@@ -22,7 +22,7 @@ class CategoryService implements CategoryServiceInterface
      */
     private CategoryRepository $categoryRepository;
 
-    private TaskRepository $taskRepository;
+    private BugRepository $taskRepository;
 
     /**
      * Paginator.
@@ -35,9 +35,9 @@ class CategoryService implements CategoryServiceInterface
      *
      * @param CategoryRepository $categoryRepository Category repository.
      * @param PaginatorInterface $paginator          Paginator.
-     * @param TaskRepository     $taskRepository     Task repository.
+     * @param BugRepository     $taskRepository     Bug repository.
      */
-    public function __construct(CategoryRepository $categoryRepository, TaskRepository $taskRepository,PaginatorInterface $paginator)
+    public function __construct(CategoryRepository $categoryRepository, BugRepository $taskRepository, PaginatorInterface $paginator)
     {
         $this->taskRepository     = $taskRepository;
         $this->categoryRepository = $categoryRepository;

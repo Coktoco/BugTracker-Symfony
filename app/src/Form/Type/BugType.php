@@ -1,12 +1,12 @@
 <?php
 /**
- * Task type.
+ * Bug type.
  */
 
 namespace App\Form\Type;
 
 use App\Entity\Category;
-use App\Entity\Task;
+use App\Entity\Bug;
 use App\Entity\Status;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -15,9 +15,9 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Class TaskType.
+ * Class BugType.
  */
-class TaskType extends AbstractType
+class BugType extends AbstractType
 {
     /**
      * Builds the form.
@@ -39,6 +39,13 @@ class TaskType extends AbstractType
                 'label' => 'label.title',
                 'required' => true,
                 'attr' => ['max_length' => 255],
+            ]);
+        $builder->add(
+            'content',
+            TextType::class,
+            [
+                'label' => 'label.content',
+                'required' => true,
             ]);
         $builder->add(
             'category',
@@ -73,7 +80,7 @@ class TaskType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefaults(['data_class' => Task::class]);
+        $resolver->setDefaults(['data_class' => Bug::class]);
     }
 
     /**
@@ -86,6 +93,6 @@ class TaskType extends AbstractType
      */
     public function getBlockPrefix(): string
     {
-        return 'task';
+        return 'bug';
     }
 }

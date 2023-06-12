@@ -1,11 +1,11 @@
 <?php
 /**
- * Task voter.
+ * Bug voter.
  */
 
 namespace App\Security\Voter;
 
-use App\Entity\Task;
+use App\Entity\Bug;
 use App\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
@@ -13,9 +13,9 @@ use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * Class TaskVoter.
+ * Class BugVoter.
  */
-class TaskVoter extends Voter
+class BugVoter extends Voter
 {
     /**
      * Edit permission.
@@ -66,7 +66,7 @@ class TaskVoter extends Voter
     protected function supports(string $attribute, $subject): bool
     {
         return in_array($attribute, [self::EDIT, self::VIEW, self::DELETE])
-            && $subject instanceof Task;
+            && $subject instanceof Bug;
     }
 
     /**
@@ -99,42 +99,42 @@ class TaskVoter extends Voter
     }
 
     /**
-     * Checks if user can edit task.
+     * Checks if user can edit bug.
      *
-     * @param Task $task Task entity
+     * @param Bug $bug Bug entity
      * @param User $user User
      *
      * @return bool Result
      */
-    private function canEdit(Task $task, User $user): bool
+    private function canEdit(Bug $bug, User $user): bool
     {
-        return $task->getAuthor() === $user;
+        return $bug->getAuthor() === $user;
     }
 
     /**
-     * Checks if user can view task.
+     * Checks if user can view bug.
      *
-     * @param Task $task Task entity
+     * @param Bug $bug Bug entity
      * @param User $user User
      *
      * @return bool Result
      */
-    private function canView(Task $task, User $user): bool
+    private function canView(Bug $bug, User $user): bool
     {
-        return $task->getAuthor() === $user;
+        return $bug->getAuthor() === $user;
     }
 
     /**
-     * Checks if user can delete task.
+     * Checks if user can delete bug.
      *
-     * @param Task $task Task entity
+     * @param Bug $bug Bug entity
      * @param User $user User
      *
      * @return bool Result
      */
-    private function canDelete(Task $task, User $user): bool
+    private function canDelete(Bug $bug, User $user): bool
     {
-        return $task->getAuthor() === $user;
+        return $bug->getAuthor() === $user;
     }
 
 }

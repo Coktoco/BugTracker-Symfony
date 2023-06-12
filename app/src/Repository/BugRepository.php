@@ -1,12 +1,12 @@
 <?php
 /**
- * Task repository.
+ * Bug repository.
  */
 
 namespace App\Repository;
 
 use App\Entity\Category;
-use App\Entity\Task;
+use App\Entity\Bug;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
@@ -16,16 +16,16 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 
 /**
- * Class TaskRepository.
+ * Class BugRepository.
  *
- * @method Task|null find($id, $lockMode = null, $lockVersion = null)
- * @method Task|null findOneBy(array $criteria, array $orderBy = null)
- * @method Task[]    findAll()
- * @method Task[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Bug|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Bug|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Bug[]    findAll()
+ * @method Bug[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  *
- * @extends ServiceEntityRepository<Task>
+ * @extends ServiceEntityRepository<Bug>
  */
-class TaskRepository extends ServiceEntityRepository
+class BugRepository extends ServiceEntityRepository
 {
     /**
      * Items per page.
@@ -45,7 +45,7 @@ class TaskRepository extends ServiceEntityRepository
      */
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Task::class);
+        parent::__construct($registry, Bug::class);
     }
 
     /**
@@ -59,13 +59,13 @@ class TaskRepository extends ServiceEntityRepository
     {
         $queryBuilder = $this->getOrCreateQueryBuilder()
             ->select(
-                'partial task.{id, createdAt, updatedAt, title, status}',
+                'partial bug.{id, createdAt, updatedAt, title, status, content}',
                 'partial category.{id, title}',
                 'partial status.{id, status}',
             )
-            ->join('task.status', 'status')
-            ->join('task.category', 'category')
-            ->orderBy('task.updatedAt', 'DESC');
+            ->join('bug.status', 'status')
+            ->join('bug.category', 'category')
+            ->orderBy('bug.updatedAt', 'DESC');
 
         return $this->applyFiltersToList($queryBuilder, $filters);
     }
@@ -107,8 +107,8 @@ class TaskRepository extends ServiceEntityRepository
     {
         $qb = $this->getOrCreateQueryBuilder();
 
-        return $qb->select($qb->expr()->countDistinct('task.id'))
-            ->where('task.category = :category')
+        return $qb->select($qb->expr()->countDistinct('bug.id'))
+            ->where('bug.category = :category')
             ->setParameter(':category', $category)
             ->getQuery()
             ->getSingleScalarResult();
@@ -126,7 +126,7 @@ class TaskRepository extends ServiceEntityRepository
     {
         $queryBuilder = $this->queryAll($filters);
 
-        $queryBuilder->andWhere('task.author = :author')
+        $queryBuilder->andWhere('bug.author = :author')
             ->setParameter('author', $user);
 
         return $queryBuilder;
@@ -136,7 +136,7 @@ class TaskRepository extends ServiceEntityRepository
     {
         $queryBuilder = $this->queryAll($filters);
 
-        $queryBuilder->andWhere('task.status = :status')
+        $queryBuilder->andWhere('bug.status = :status')
             ->setParameter('status', $status);
 
         return $queryBuilder;
@@ -146,22 +146,22 @@ class TaskRepository extends ServiceEntityRepository
     /**
      * Save entity.
      *
-     * @param Task $task Task entity
+     * @param Bug $bug Bug entity
      */
-    public function save(Task $task): void
+    public function save(Bug $bug): void
     {
-        $this->_em->persist($task);
+        $this->_em->persist($bug);
         $this->_em->flush();
     }
 
     /**
      * Delete entity.
      *
-     * @param Task $task Task entity
+     * @param Bug $bug Bug entity
      */
-    public function delete(Task $task): void
+    public function delete(Bug $bug): void
     {
-        $this->_em->remove($task);
+        $this->_em->remove($bug);
         $this->_em->flush();
     }
 
@@ -174,7 +174,7 @@ class TaskRepository extends ServiceEntityRepository
      */
     private function getOrCreateQueryBuilder(QueryBuilder $queryBuilder = null): QueryBuilder
     {
-        return $queryBuilder ?? $this->createQueryBuilder('task');
+        return $queryBuilder ?? $this->createQueryBuilder('bug');
     }
 
 }

@@ -1,21 +1,21 @@
 <?php
 /**
- * Task fixtures.
+ * Bug fixtures.
  */
 
 namespace App\DataFixtures;
 
 use App\Entity\Category;
-use App\Entity\Task;
+use App\Entity\Bug;
 use App\Entity\User;
 use App\Entity\Status;
 use DateTimeImmutable;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
 /**
- * Class TaskFixtures.
+ * Class BugFixtures.
  */
-class TaskFixtures extends AbstractBaseFixtures implements DependentFixtureInterface
+class BugFixtures extends AbstractBaseFixtures implements DependentFixtureInterface
 {
     /**
      * Load data.
@@ -30,32 +30,35 @@ class TaskFixtures extends AbstractBaseFixtures implements DependentFixtureInter
             return;
         }
 
-        $this->createMany(100, 'tasks', function (int $i) {
-            $task = new Task();
-            $task->setTitle($this->faker->sentence);
-            $task->setCreatedAt(
+        $this->createMany(100, 'bugs', function (int $i) {
+            $bug = new Bug();
+            $bug->setTitle($this->faker->sentence);
+            $bug->setCreatedAt(
                 DateTimeImmutable::createFromMutable(
                     $this->faker->dateTimeBetween('-100 days', '-1 days')
                 )
             );
-            $task->setUpdatedAt(
+            $bug->setUpdatedAt(
                 DateTimeImmutable::createFromMutable(
                     $this->faker->dateTimeBetween('-100 days', '-1 days')
                 )
             );
             /** @var Category $category */
             $category = $this->getRandomReference('categories');
-            $task->setCategory($category);
+            $bug->setCategory($category);
 
             /** @var Status $status */
             $status = $this->getRandomReference('statuses');
-            $task->setStatus($status);
+            $bug->setStatus($status);
 
             /** @var User $author */
             $author = $this->getRandomReference('admins');
-            $task->setAuthor($author);
+            $bug->setAuthor($author);
 
-            return $task;
+            /** @var Content $content */
+            $bug->setContent($this->faker->text);
+
+            return $bug;
         });
 
         $this->manager->flush();
@@ -67,7 +70,7 @@ class TaskFixtures extends AbstractBaseFixtures implements DependentFixtureInter
      *
      * @return string[] of dependencies
      *
-     * @psalm-return array{0: CategoryFixtures::class, 1: TagFixtures::class, 2: UserFixtures::class}
+     * @psalm-return array{0: CategoryFixtures::class, 1: UserFixtures::class}
      */
     public function getDependencies(): array
     {

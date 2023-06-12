@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ 'title.bug_details'|trans({'%id%': bug.id|default('')}) }}
+{% endblock %}
+
+{% block body %}
+    <h1>{{ 'title.bug_details'|trans({'%id%': bug.id|default('')}) }}</h1>
+    {% if bug is defined and bug|length %}
+        <dl class="dl-horizontal ">
+            <dt>{{ 'label.id'|trans }}</dt>
+            <dd>{{ bug.id }}</dd>
+            <dt>{{ 'label.createdAt'|trans }}</dt>
+            <dd>{{ bug.createdAt|format_date('long') }}</dd>
+            <dt>{{ 'label.updatedAt'|trans }}</dt>
+            <dd>{{ bug.updatedAt|format_date('long') }}</dd>
+            <dt>{{ 'label.reportedBy'|trans }}</dt>
+            <dd>{{ bug.author.email }}</dd>
+            <dt>{{ 'label.title'|trans }}</dt>
+            <dd>{{  bug.title }}</dd>
+            <dt>{{ 'label.content'|trans }}</dt>
+            <dd>{{  bug.content }}</dd>
+            <dt>{{ 'label.category'|trans }}</dt>
+            <dd>{{  bug.category.title }}</dd>
+        </dl>
+        <p>
+            <a class="btn btn-primary" href="{{ url('bug_index') }}" title="{{ 'action.return'|trans }}">
+                {{ 'action.return'|trans }}
+            </a>
+        </p>
+    {% else %}
+        <p>
+            {{ 'message.record_not_found'|trans }}
+        </p>
+    {% endif %}
+{% endblock %}

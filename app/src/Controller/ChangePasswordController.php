@@ -82,7 +82,7 @@ class ChangePasswordController extends AbstractController
                     $this->translator->trans('message.password_changed')
                 );
 
-                return $this->redirectToRoute('task_index');
+                return $this->redirectToRoute('bug_index');
             }
         }
 

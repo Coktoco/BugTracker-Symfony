@@ -1,11 +1,11 @@
 <?php
 /**
- * Task entity.
+ * Bug entity.
  */
 
 namespace App\Entity;
 
-use App\Repository\TaskRepository;
+use App\Repository\BugRepository;
 use DateTimeImmutable;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -13,13 +13,13 @@ use Gedmo\Mapping\Annotation as Gedmo;
 
 
 /**
- * Class Task.
+ * Class Bug.
  *
  * @psalm-suppress MissingConstructor
  */
-#[ORM\Entity(repositoryClass: TaskRepository::class)]
-#[ORM\Table(name: 'tasks')]
-class Task
+#[ORM\Entity(repositoryClass: BugRepository::class)]
+#[ORM\Table(name: 'bugs')]
+class Bug
 {
     /**
      * Primary key.
@@ -86,6 +86,9 @@ class Task
     #[ORM\ManyToOne(targetEntity: Status::class)]
     #[ORM\JoinColumn(nullable: true)]
     private ?Status $status = null;
+
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $content = null;
 
 
     /**
@@ -190,6 +193,18 @@ class Task
     public function setStatus(?Status $status): self
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    public function getContent(): ?string
+    {
+        return $this->content;
+    }
+
+    public function setContent(string $Content): self
+    {
+        $this->content = $Content;
 
         return $this;
     }
