@@ -1,82 +1,102 @@
-# Docker Symfony Starter Kit
+# Bug Tracker Application
 
-Starter kit is based on [The perfect kit starter for a Symfony 4 project with Docker and PHP 7.2](https://medium.com/@romaricp/the-perfect-kit-starter-for-a-symfony-4-project-with-docker-and-php-7-2-fda447b6bca1).
+## Overview
 
-## What is inside?
+The **Bug Tracker** application is a web-based tool designed to help teams manage and track bugs and errors efficiently. It provides a simple, minimalistic interface focused on usability and user experience.
 
-* Apache 2.4.25 (Debian)
-* PHP 8.1 FPM
-* MySQL 8.0.x (5.7)
-* NodeJS LTS (latest)
-* Composer
-* Symfony CLI 
-* xdebug
-* djfarrelly/maildev
+Application is in polish.
 
-## Requirements
+## Features
 
-* Install [Docker](https://www.docker.com/products/docker-desktop) and [Docker Compose](https://docs.docker.com/compose/install) on your machine 
+- **Admin Management**: Administrators can add, edit, and delete bug reports, each containing the bug's name and a description.
+- **Categorization**: Bugs can be organized into categories, which can also be managed by administrators.
+- **Status Tracking**: Bugs can be assigned statuses to reflect their current progress:
+  - `Fixed` (Naprawione)
+  - `Work in Progress (WIP)` (W trakcie naprawy)
+  - `In Queue` (Informacja o błędzie dotarła do zespołu, czeka na naprawę)
+  - `Not Fixed` (Nie naprawione)
+- **User Access**: Non-administrative users can view bug reports in a read-only mode.
+- **Pagination and Filtering**: Bug reports are displayed with pagination (10 per page) and can be filtered by category or status.
 
 ## Installation
 
-* (optional) Add 
+To install the Bug Tracker application, follow these steps:
 
-```bash
-127.0.0.1   symfony.local
-```
-in your `host` file.
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/yourusername/bug-tracker.git
+   cd bug-tracker
+   
+2. **Install dependencies**:
+   ```bash
+   composer install
+   npm install
+   npm run build
+   
+3. **Configure environment**:
+   - copy .env.example to .env
+   ```bash
+   cp .env.example .env
 
-* Run `build-env.sh` (or `build-env.ps1` on Windows box)
+4. **Run database migrations**:
+   ```bash
+   php bin/console doctrine:migrations:migrate
 
-* Enter the PHP container:
+The application will be accessible at http://127.0.0.1:8000.
 
-```bash
-docker-compose exec php bash
-```
+## Usage
 
-* To install Symfony LTS inside container execute:
+### Admin Panel
 
-```bash
-cd app
-rm .gitkeep
-git config --global user.email "you@example.com"
-symfony new ../app --full --version=lts
-chown -R dev.dev *
-```
+- **Create Bug**: Admins can navigate to the “Create Bug” page to add new bugs with a name, description, category, and status.
+- **Edit Bug**: Admins can edit existing bugs by navigating to the “Edit Bug” page.
+- **Delete Bug**: Admins can delete bugs through the “Delete Bug” page.
+- **Manage Categories**: Admins can create, edit, or delete categories used for organizing bug reports.
 
-## Container URLs and ports
+### User Access
 
-* Project URL
+- **View Bugs**: Users can view all bugs, filter by category or status, and browse through paginated results.
 
-```bash
-http://localhost:8000
-```
+## Technologies Used
 
-or 
+- **Symfony**: PHP framework for building web applications.
+- **Twig**: Templating engine for rendering views.
+- **Doctrine ORM**: Object-Relational Mapper for database management.
+- **Bootstrap**: CSS framework for responsive and simple front-end design.
 
-```bash
-http://symfony.local:8000
-```
+## Contributing
 
-* MySQL
+Contributions are welcome! If you have suggestions or new features in mind, please open an issue or submit a pull request. For major changes, it’s recommended to start a discussion first to ensure alignment.
 
-    * inside container: host is `mysql`, port: `3306`
-    * outside container: host is `localhost`, port: `3307`
-    * passwords, db name are in `docker-compose.yml`
-    
-* djfarrelly/maildev i available from the browser on port `8001`
+## License
 
-* xdebug i available remotely on port `9000`
+This project is licensed under the MIT License.
 
-* Database connection in Symfony `.env` file:
-```yaml
-DATABASE_URL=mysql://symfony:symfony@mysql:3306/symfony?serverVersion=5.7
-```
+## Contact
 
-## Useful commands
+For any questions or more information, feel free to contact me via email or LinkedIn.
 
-* `docker-compose up -d` - start containers
-* `docker-compose down` - stop contaniners
-* `docker-compose exec php bash` - enter into PHP container
-* `docker-compose exec mysql bash` - enter into MySQL container
-* `docker-compose exec apache bash` - enter into Apache2 container
+## Screenshots
+
+Below are some screenshots of the working project:
+
+### Homepage - normal user:
+<img width="1512" alt="Zrzut ekranu 2024-08-30 o 11 50 33" src="https://github.com/user-attachments/assets/3f438ed3-24da-47b6-80a0-bd550bec8f8c">
+
+### Homepage - admin:
+<img width="1512" alt="Zrzut ekranu 2024-08-30 o 11 54 05" src="https://github.com/user-attachments/assets/fcd980d2-f63c-4854-a483-22ea4ffe3e01">
+
+### Adding new bug info: 
+<img width="1512" alt="Zrzut ekranu 2024-08-30 o 11 55 27" src="https://github.com/user-attachments/assets/43f46ae4-d89b-40b5-937a-d78c5c8e9c05">
+
+### Updating the Bug info:
+<img width="1512" alt="Zrzut ekranu 2024-08-30 o 11 56 00" src="https://github.com/user-attachments/assets/5a725072-d58c-4ea0-987d-39f484774074">
+
+
+
+
+
+
+
+
+   
