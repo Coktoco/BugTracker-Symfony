@@ -24,7 +24,7 @@ To install the Bug Tracker application, follow these steps:
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/yourusername/bug-tracker.git
+   git clone https://github.com/Coktoco/BugTracker-Symfony.git
    cd bug-tracker
    
 2. **Install dependencies**:
