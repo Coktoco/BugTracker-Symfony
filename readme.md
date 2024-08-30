@@ -4,7 +4,7 @@
 
 The **Bug Tracker** application is a web-based tool designed to help teams manage and track bugs and errors efficiently. It provides a simple, minimalistic interface focused on usability and user experience.
 
-Application is in polish.
+**Important**: Application is available in polish.
 
 ## Features
 
